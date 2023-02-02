@@ -1,0 +1,179 @@
+@import '../../styles/_media.scss';
+
+.single {
+    width: 100%;
+
+    .singleWrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        .singleHeader {
+            width: 100%;
+            height: 350px;
+            background-image: url("/shapes.png") !important; 
+            background-size: cover;
+
+            @include for-phone-only {
+                padding-top: 10px;
+            }
+
+            .singleHeaderWrapper {
+                padding: 10px;
+                max-width: 1100px;
+                margin: auto;
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+                height: 70%;
+
+                @include for-phone-only {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .postinfo {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 15px;
+                    width: 70%;
+
+                    @include for-phone-only {
+                        width: 100%;
+                    }
+
+                    .postTitle {
+                        color: #fff;
+                        font-size: 2.5rem;
+
+                        @include for-phone-only {
+                            font-size: 1.8rem;
+                        }
+                    }
+
+                    .postCategory {
+                        font-size: 1.2rem;
+                        color: #55c5e1
+                    }
+                }
+
+                .postMeta {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 20%;
+                    gap: 20px;
+
+                    @include for-phone-only {
+                        flex-direction: row-reverse;
+                        justify-content: space-around;
+                        width: 100%;
+
+                    }
+
+                    .postShare {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+
+                        span {
+                            padding: .5em;
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            position: relative;
+
+                            @include for-phone-only {
+                                width: 30px;
+                                height: 30px;
+                                background: unset;
+                            }
+
+                            svg {
+                                position: absolute;
+                                right: 28%;
+                                top: 28%;
+                            }
+                        }
+                    }
+
+                    .authorDate {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+
+
+
+                        .authorAvatar img {
+                            border-radius: 50%;
+                        }
+
+                        .authorMeta {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 5px;
+
+                            .authorName {
+                                color: #fff;
+                            }
+
+                            .pubDate {
+                                color: rgb(202, 202, 202);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .singleContent {
+            max-width: 1100px;
+            width: 100%;
+            // position: absolute;
+            margin-top: -110px;
+            top: 70%;
+            padding: 10px;
+            line-height: 2em;
+            font-size: 1.2rem;
+            color: #0b2050;
+
+            p {
+                margin: 1em 0;
+                font-weight: 300;
+            }
+
+            img {
+                margin: 2em auto;
+                display: block;
+                -webkit-box-shadow: 13px 13px 23px 1px rgba(0, 0, 0, 0.11);
+                -moz-box-shadow: 13px 13px 23px 1px rgba(0, 0, 0, 0.11);
+                box-shadow: 13px 13px 23px 1px rgba(0, 0, 0, 0.11);
+                max-width: 100%;
+
+            }
+
+            .featImage {
+                width: 100%;
+                margin-bottom: 20px;
+
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                    margin: 0;
+
+                    @include for-phone-only {
+                        max-height: 250px;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
