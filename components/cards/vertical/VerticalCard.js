@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import styles from "./Card.module.scss";
+import styles from "./VerticalCard.module.scss";
 
-export default function Card() {
+export default function VerticalCard() {
   return (
     <div className={styles.card}>
       <div className={styles.cardWrapper}>

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../cards/Card";
+import VerticalCard from "../../cards/vertical/VerticalCard";
 import styles from "./RelatedPosts.module.scss";
 
 export default function RelatedPosts() {
@@ -8,9 +8,9 @@ export default function RelatedPosts() {
       <div className={styles.relatedWrapper}>
         <h3 className={styles.relatedTitle}>Related Posts</h3>
         <div className={styles.relatedContent}>
-          <Card />
-          <Card />
-          <Card />
+          <VerticalCard />
+          <VerticalCard />
+          <VerticalCard />
         </div>
       </div>
     </div>

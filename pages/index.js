@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
+import FeatGrid from "../components/sections/featGrid/FeatGrid";
 import SingleFeat from "../components/sections/singleFeat/singleFeat";
 import ThreeColGrid from "../components/sections/threecolgrid/ThreeColGrid";
 import RelatedPosts from "../components/widgets/relatedPosts/RelatedPosts";
@@ -15,7 +16,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <SingleFeat/>
+      <FeatGrid/>
+      {/* <SingleFeat/> */}
       <ThreeColGrid/>
       <Footer/>
     </div>

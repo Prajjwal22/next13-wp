@@ -1,0 +1,91 @@
+@import '../../../styles/media';
+
+.card {
+    width: 100%;
+
+    .cardWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+
+        @include for-phone-only {
+            flex-direction: column;
+        }
+
+        .cardImage {
+            max-width: 600px;
+            margin-bottom: 20px;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                transition: all .3s;
+                &:hover {
+                    opacity: 1;
+                    box-shadow: 0 15px 45px -5px rgb(7 10 25 / 25%);
+                    -webkit-filter: brightness(1.07);
+                    filter: brightness(1.07);
+                    transform: translate(0,-2px);
+                }
+            }
+        }
+
+        .cardContent {
+            display: flex;
+            flex-direction: column;
+            padding: 0 20px;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 50%;
+
+            @include for-phone-only {
+                max-width: 100%;
+            }
+
+            .cardCategory {
+                color: rgb(21, 128, 186);
+                font-size: 1rem;
+                cursor: pointer;
+            }
+
+            .cardTitle {
+                font-size: 1.8rem;
+                color: #0b2050;
+                font-weight: 700;
+                cursor: pointer;
+            }
+
+            .cardExcerpt {
+                color: #626365;
+                font-weight: 300;
+                line-height: 1.5rem;
+            }
+
+            .cardMeta {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 300;
+
+                .cardAuthorDate {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3px;
+
+                    .cardAuthor {
+                        font-weight: 400;
+                        cursor: pointer;
+                    }
+
+                    .cardpubDate {
+                        color: #626365;
+                        font-size: .9rem;
+                    }
+                }
+            }
+        }
+    }
+}
