@@ -37,7 +37,7 @@ export default function SinglePost({ children }) {
   return (
     <article className={styles.single}>
        <div id="progressBarContainer">
-                <div id="progressBar" style={{transform: `scale(${scroll}, 1)`, opacity: `${scroll}`}} />
+                <div id="progressBar" style={{transform: `scale(${scroll}, 1)`, opacity: `${scroll}`, background:`${data.darkVibrant}`}}/>
             </div>
       <div className={styles.singleWrapper}>
         <div
