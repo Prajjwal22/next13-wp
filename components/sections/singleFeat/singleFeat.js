@@ -8,8 +8,6 @@ export default function () {
   return (
     <div className={styles.singleFeat}>
         <div className={styles.singleFeatWrapper}>
-            <HorizontalCard/>
-            <OverlayCard/>
         </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
+import ListPosts from "../components/listposts/ListPosts";
 import FeatGrid from "../components/sections/featGrid/FeatGrid";
 import SingleFeat from "../components/sections/singleFeat/singleFeat";
 import ThreeColGrid from "../components/sections/threecolgrid/ThreeColGrid";
@@ -17,7 +18,7 @@ export default function Home() {
       </Head>
       <Header />
       <FeatGrid/>
-      {/* <SingleFeat/> */}
+      <ListPosts/>
       <ThreeColGrid/>
       <Footer/>
     </div>

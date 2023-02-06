@@ -4,7 +4,7 @@
 .featGrid {
     width: 100vw;
     background-color: black;
-    padding: 40px 50px;
+    padding: 30px 10px;
     .gridWrapper {
         display: grid;
         grid-template-columns: auto 1fr;
@@ -17,7 +17,7 @@
         }
 
         @include  for-desktop-up  {
-            grid-template-columns: auto 1fr;
+            grid-template-columns: 3fr 2fr;
             }
 
 

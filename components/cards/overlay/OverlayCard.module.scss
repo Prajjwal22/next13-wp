@@ -4,26 +4,32 @@
 .overlayCard {
     width: 100%;
     color: #fff;
+    height: 100%;
 
     .cardWrapper {
         max-width: 100%;
-        height: auto;
+        height: 100%;
     cursor: pointer;
 
 
         .cardImage {
             position: relative;
             max-width: 100%;
-            height: auto;
+            height: 100%;
+
 
             @include for-phone-only {
                 max-width: 400px;
-                height: fit-content;
+                height: auto;
             }
 
             img {
                 width: 100%;
                 object-fit: cover;
+                @include for-phone-only {
+                    height: auto;
+                }
+
             }
 
             &::after {
@@ -55,7 +61,7 @@
                 text-transform: capitalize;
 
                 @include for-phone-only {
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                 }
 
                 &:hover {
