@@ -11,7 +11,6 @@ import SinglePost from "../Layouts/singlepost/SinglePost";
 import { client } from "../lib/apollo";
 
 export default function Home({ posts, title, content }) {
-  console.log("dsadsa", posts);
 
   return (
     <div>

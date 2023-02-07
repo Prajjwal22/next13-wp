@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { formatDate } from "../../../lib/dateFormatter";
 import styles from "./HorizontalCard.module.scss";
@@ -11,23 +12,24 @@ export default function HorizontalCard({ post }) {
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name;
   const excerpt = post.excerpt
+  const slug = post.slug
 
   return (
     <div className={styles.card}>
       <div className={styles.cardWrapper}>
         <div className={styles.cardImage}>
-          <Image
+        <Link href={slug}> <Image
             src={featuredImage}
             width={400}
             height={300}
             alt={postTitle}
-          />
+          /></Link>
         </div>
         <div className={styles.cardContent}>
           <span className={styles.cardCategory}>{category}</span>
-          <span className={styles.cardTitle}>
+          <Link href={slug}>   <span className={styles.cardTitle}>
             {postTitle}
-          </span>
+          </span></Link>
           <span className={styles.cardExcerpt} dangerouslySetInnerHTML={{ __html: excerpt }}>
           </span>
           <div className={styles.cardMeta}>
