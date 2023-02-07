@@ -7,6 +7,7 @@
     padding: 20px 10px;
     margin-left: 20px;
     cursor: pointer;
+
     .cardCategory {
         writing-mode: vertical-rl;
         text-orientation: sideways;
@@ -17,18 +18,27 @@
         font-size: 0.65rem;
         letter-spacing: .15em;
     }
+
     .cardTitle {
         margin: 0;
         color: #fff;
+
         &:hover {
             text-decoration: underline;
             text-decoration-color: #95f6df;
         }
-        h3 {
-        font-size: 1.3rem;
-        font-weight: 500;
 
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.3em;
+
+            strong {
+                font-weight: 500 !important;
+
+            }
         }
+
         .cardMeta {
             display: inline-block;
             padding-top: 4px;
@@ -37,10 +47,18 @@
             letter-spacing: .15em;
             color: #fff;
         }
-        
+
         .cardAuthor {
             margin-right: 10px;
             color: var(--primary-color);
+        }
+    }
+
+    .cardThumb {
+        width: auto;
+
+        img {
+            object-fit: cover;
         }
     }
 }

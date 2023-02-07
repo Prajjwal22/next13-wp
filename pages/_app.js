@@ -1,5 +1,7 @@
 import "../styles/globals.scss";
 import localFont from "@next/font/local";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "../lib/apollo";
 
 const gtWalsheim = localFont({
   src: [
@@ -38,9 +40,11 @@ const gtWalsheim = localFont({
 
 function MyApp({ Component, pageProps }) {
   return (
+    <ApolloProvider client={client}>
     <main className={gtWalsheim.className}>
       <Component {...pageProps} />
     </main>
+    </ApolloProvider>
   );
 }
 

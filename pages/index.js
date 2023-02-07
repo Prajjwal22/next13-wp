@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client";
 import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
@@ -7,8 +8,11 @@ import SingleFeat from "../components/sections/singleFeat/singleFeat";
 import ThreeColGrid from "../components/sections/threecolgrid/ThreeColGrid";
 import RelatedPosts from "../components/widgets/relatedPosts/RelatedPosts";
 import SinglePost from "../Layouts/singlepost/SinglePost";
+import { client } from "../lib/apollo";
 
-export default function Home() {
+export default function Home({ posts, title, content }) {
+  console.log("dsadsa", posts);
+
   return (
     <div>
       <Head>
@@ -17,10 +21,55 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <FeatGrid/>
-      <ListPosts/>
-      <ThreeColGrid/>
-      <Footer/>
+      <FeatGrid posts={posts} />
+      <ListPosts posts={posts} />
+      <ThreeColGrid posts={posts} />
+      <Footer />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const result = await client.query({
+    query: gql`
+      query PostLists {
+        pageBy(uri: "/") {
+          title
+          content
+        }
+        posts(first:20) {
+          nodes {
+            title
+            slug
+            modified
+            featuredImage {
+              node {
+                sourceUrl(size: CSCO_MEDIUM)
+              }
+            }
+            excerpt
+            categories {
+              nodes {
+                name
+              }
+            }
+            author {
+              node {
+                avatar {
+                  url
+                }
+                name
+              }
+            }
+          }
+        }
+      }
+    `,
+  });
+
+  return {
+    props: {
+      posts: result.data.posts.nodes,
+    },
+  };
 }

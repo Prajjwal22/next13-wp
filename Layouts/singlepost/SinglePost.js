@@ -2,43 +2,51 @@ import Image from "next/image";
 import { usePalette } from "react-palette";
 
 import React, { useEffect, useState } from "react";
-import {
-  FaFacebook,
-  FaFacebookF,
-  FaGooglePlus,
-  FaLinkedin,
-  FaLinkedinIn,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import styles from "./SinglePost.module.scss";
+import { formatDate } from "../../lib/dateFormatter";
 
-export default function SinglePost({ children }) {
-  const { data } = usePalette("/featured.avif");
+export default function SinglePost({ children, post }) {
+  const featuredImage = post.featuredImage.node.sourceUrl;
+  const postTitle = post.title;
+  const authorName = post.author?.node?.name || "Editorial Staff";
+  const avatar = post.author?.node?.avatar?.url || "/profile.png";
+  const pubDate = post.modified;
+  const category = post.categories.nodes[0].name;
+  const content = post.content;
+
+  const { data } = usePalette(featuredImage);
 
   const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
-
     let progressBarHandler = () => {
-        
-        const totalScroll = document.documentElement.scrollTop;
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scroll = `${totalScroll / windowHeight}`;
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scroll = `${totalScroll / windowHeight}`;
 
-        setScroll(scroll);
-    }
+      setScroll(scroll);
+    };
 
     window.addEventListener("scroll", progressBarHandler);
 
     return () => window.removeEventListener("scroll", progressBarHandler);
-});
-
+  });
 
   return (
     <article className={styles.single}>
-       <div id="progressBarContainer">
-                <div id="progressBar" style={{transform: `scale(${scroll}, 1)`, opacity: `${scroll}`, background:`${data.darkVibrant}`}}/>
-            </div>
+      <div id="progressBarContainer">
+        <div
+          id="progressBar"
+          style={{
+            transform: `scale(${scroll}, 1)`,
+            opacity: `${scroll}`,
+            background: `${data.darkVibrant}`,
+          }}
+        />
+      </div>
       <div className={styles.singleWrapper}>
         <div
           style={{ background: data.darkVibrant }}
@@ -50,10 +58,10 @@ export default function SinglePost({ children }) {
                 style={{ color: data.lightVibrant }}
                 className={styles.postCategory}
               >
-                Technology
+               {category}
               </span>
               <h1 className={styles.postTitle}>
-                An Extraordinary WebGL Environment Has Been Released By Great
+                {postTitle}
               </h1>
             </div>
             <div className={styles.postMeta}>
@@ -71,15 +79,15 @@ export default function SinglePost({ children }) {
               <div className={styles.authorDate}>
                 <div className={styles.authorAvatar}>
                   <Image
-                    src="/profile.png"
-                    alt="author avatar"
-                    width={60}
+                    src={avatar}
+                    alt={authorName}
                     height={60}
+                    width={60}
                   />
                 </div>
                 <div className={styles.authorMeta}>
-                  <span className={styles.authorName}>Anna Anderson</span>
-                  <span className={styles.pubDate}>Jun 24, 2022</span>
+                  <span className={styles.authorName}>{authorName}</span>
+                  <span className={styles.pubDate}>{formatDate(new Date(pubDate))}</span>
                 </div>
               </div>
             </div>
@@ -88,8 +96,8 @@ export default function SinglePost({ children }) {
         <div className={styles.singleContent}>
           <div className={styles.featImage}>
             <Image
-              src="/featured.avif"
-              alt="Feature Image"
+              src={featuredImage}
+              alt={postTitle}
               width={800}
               height={600}
             />
