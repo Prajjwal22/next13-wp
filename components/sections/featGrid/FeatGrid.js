@@ -12,7 +12,7 @@ export default function FeatGrid({posts}) {
             </div>
             <div className={styles.right}>
               {posts.slice(1,6).map((post,i) => {
-                return <ListCard post = {post}/>
+                return <ListCard key={i} post = {post}/>
               })}
                 
             </div>

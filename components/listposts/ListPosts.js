@@ -8,7 +8,7 @@ export default function ListPosts({posts}) {
       <h3 className="container">Popular of the Week!</h3>
       <div className={styles.listPostsWrapper}>
         {posts.slice(6,9).map((post, i)=> {
-          return <HorizontalCard post={post} />
+          return <HorizontalCard key={i} post={post} />
         })}
       </div>
     </div>
