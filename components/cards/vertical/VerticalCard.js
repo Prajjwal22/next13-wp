@@ -6,8 +6,6 @@ import styles from "./VerticalCard.module.scss";
 
 export default function VerticalCard({post}) {
 
-  console.log(post)
-
   const featuredImage = post.featuredImage.node.sourceUrl;
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";

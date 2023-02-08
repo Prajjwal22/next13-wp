@@ -61,7 +61,7 @@
                 text-transform: capitalize;
 
                 @include for-phone-only {
-                    font-size: 1.5rem;
+                    font-size: 1.3rem;
                 }
 
                 &:hover {
@@ -74,6 +74,10 @@
                 display: flex;
                 gap: 20px;
                 font-weight: 300;
+
+                @include for-phone-only {
+                    font-size: .9rem;
+                }
 
                 svg {
                     margin-right: 5px;

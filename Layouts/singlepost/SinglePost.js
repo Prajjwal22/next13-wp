@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { usePalette } from "react-palette";
+// import { usePalette } from "react-palette";
 
 import React, { useEffect, useState } from "react";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
@@ -15,7 +15,7 @@ export default function SinglePost({ children, post }) {
   const category = post.categories.nodes[0].name;
   const content = post.content;
 
-  const { data } = usePalette(featuredImage);
+  // const { data } = usePalette(featuredImage);
 
   const [scroll, setScroll] = useState(0);
 
@@ -43,19 +43,19 @@ export default function SinglePost({ children, post }) {
           style={{
             transform: `scale(${scroll}, 1)`,
             opacity: `${scroll}`,
-            background: `${data.darkVibrant}`,
+            background: `#fff`,
           }}
         />
       </div>
       <div className={styles.singleWrapper}>
         <div
-          style={{ background: data.darkVibrant }}
+          style={{ background: "red" }}
           className={styles.singleHeader}
         >
           <div className={styles.singleHeaderWrapper}>
             <div className={styles.postinfo}>
               <span
-                style={{ color: data.lightVibrant }}
+                style={{ color: "white" }}
                 className={styles.postCategory}
               >
                {category}
@@ -66,13 +66,13 @@ export default function SinglePost({ children, post }) {
             </div>
             <div className={styles.postMeta}>
               <div className={styles.postShare}>
-                <span style={{ background: data.muted }}>
+                <span style={{ background: "white"  }}>
                   <FaTwitter color="white" size={20} />
                 </span>
-                <span style={{ background: data.muted }}>
+                <span style={{ background: "white"  }}>
                   <FaFacebookF color="white" size={20} />
                 </span>
-                <span style={{ background: data.muted }}>
+                <span style={{ background: "white"  }}>
                   <FaLinkedinIn color="white" size={20} />
                 </span>
               </div>

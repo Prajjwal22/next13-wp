@@ -9,15 +9,9 @@ import {
   FaTimes,
   FaSearch,
 } from "react-icons/fa";
+import Link from "next/link";
 
-export default function Header() {
-  const navigationMenu = [
-    { "Home": "#" },
-    { "Creative Studio": "#" },
-    { "Design": "#" },
-    { "About us": "#" },
-    { "Blog": "#" },
-  ];
+export default function Header({menu}) {
 
   const [open, setOpen] = useState(false);
 
@@ -33,10 +27,9 @@ export default function Header() {
         </div>
         <div className={styles.navigation}>
           <div className={styles.navigatinMenu}>
-            <span className={styles.navLink}>Home</span>
-            <span className={styles.navLink}>Creative Studio</span>
-            <span className={styles.navLink}>Blog</span>
-            <span className={styles.navLink}>About us</span>
+            {menu.slice(1,6).map((item, i) => {
+              return <Link key={i} href={item.url}><span className={styles.navLink}>{item.title}</span></Link>
+            })}
           </div>
         </div>
         <div className={styles.socials}>
@@ -76,10 +69,9 @@ export default function Header() {
           {open && (
             <div className={styles.mobileNav}>
               <div className={styles.mobileMenu}>
-                <span className={styles.navLink}>Home</span>
-                <span className={styles.navLink}>Creative Studio</span>
-                <span className={styles.navLink}>Blog</span>
-                <span className={styles.navLink}>About us</span>
+              {menu.slice(1,6).map((item, i) => {
+              return <Link key={i} href={item.url}><span className={styles.navLink}>{item.title}</span></Link>
+            })}
               </div>
             </div>
           )}
