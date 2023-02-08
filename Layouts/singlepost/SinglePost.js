@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { usePalette } from "react-palette";
-
 import React, { useEffect, useState } from "react";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import styles from "./SinglePost.module.scss";
 import { formatDate } from "../../lib/dateFormatter";
+import { usePalette } from "../../lib/usePalette";
 
 export default function SinglePost({ children, post }) {
   const featuredImage = post.featuredImage.node.sourceUrl;
@@ -100,6 +99,7 @@ export default function SinglePost({ children, post }) {
               alt={postTitle}
               width={800}
               height={600}
+              loading="lazy"
             />
           </div>
           <div className={styles.mainContent}>{children}</div>
