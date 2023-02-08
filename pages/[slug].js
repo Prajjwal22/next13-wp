@@ -14,12 +14,12 @@ export default function Single({ post,menu }) {
 
   const SEO = post.seo.fullHead
 
-  console.log(post.seo.fullHead);
+  // console.log(post.seo.fullHead);
   return (
     <div>
       <Head>
         <title>{post.title}</title>
-        <head dangerouslySetInnerHTML={{ __html: SEO }}></head>
+        <span dangerouslySetInnerHTML={{ __html: SEO }}></span>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header menu={menu} />

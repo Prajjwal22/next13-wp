@@ -99,7 +99,6 @@ export default function SinglePost({ children, post }) {
               alt={postTitle}
               width={800}
               height={600}
-              loading="lazy"
             />
           </div>
           <div className={styles.mainContent}>{children}</div>
