@@ -13,7 +13,7 @@ export default function SinglePost({ children, post }) {
   const avatar = post.author?.node?.avatar?.url || "/profile.png";
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name;
-  const content = post.content;
+
 
   const { data } = usePalette(featuredImage);
 
