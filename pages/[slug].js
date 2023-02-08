@@ -1,10 +1,12 @@
 import { gql } from "@apollo/client";
+import { Parser } from "htmlparser2";
 import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import RelatedPosts from "../components/widgets/relatedPosts/RelatedPosts";
 import SinglePost from "../Layouts/singlepost/SinglePost";
 import { client } from "../lib/apollo";
+import parse  from "html-react-parser"
 
 
 export default function Single({ post,menu }) {
@@ -12,14 +14,13 @@ export default function Single({ post,menu }) {
 
   const relatedPosts = postsByCategory.filter((relPost) => relPost.title !== post.title);
 
-  const SEO = post.seo.fullHead
+  const SEO = parse( post.seo.fullHead)
 
   // console.log(post.seo.fullHead);
   return (
     <div>
       <Head>
-        <title>{post.title}</title>
-        <span dangerouslySetInnerHTML={{ __html: SEO }}></span>
+        {SEO}
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header menu={menu} />

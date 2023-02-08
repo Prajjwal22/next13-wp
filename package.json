@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.7",
+    "@next/font": "^13.1.6",
     "graphql": "^16.6.0",
+    "html-react-parser": "^3.0.8",
     "lodash.camelcase": "^4.3.0",
     "lodash.invoke": "^4.5.2",
     "next": "13.1.6",
