@@ -24,7 +24,7 @@ export default function Single({ post,menu }) {
       </Head>
       <Header menu={menu} />
       <SinglePost post={post}>
-        <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+        <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
       </SinglePost>
       <RelatedPosts relatedPosts= {relatedPosts}  />
       <Footer />
