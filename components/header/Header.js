@@ -23,7 +23,7 @@ export default function Header({menu}) {
     <header className={styles.header}>
       <div className={styles.headerWrapper}>
         <div className={styles.brand}>
-          <Image src="/logo.png" alt="brand name" width={250} height={60} />
+          <Link href="/"><Image src="/logo.png" alt="brand name" width={250} height={60} /></Link>
         </div>
         <div className={styles.navigation}>
           <div className={styles.navigatinMenu}>

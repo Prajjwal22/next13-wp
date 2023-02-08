@@ -74,5 +74,6 @@ export async function getStaticProps() {
       menu: result.data.menuItems.nodes,
       posts: result.data.posts.nodes,
     },
+    revalidate: 10,
   };
 }
