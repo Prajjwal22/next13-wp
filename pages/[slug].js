@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { renderToStaticMarkup } from 'react-dom/server';
 import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
@@ -6,27 +7,31 @@ import RelatedPosts from "../components/widgets/relatedPosts/RelatedPosts";
 import SinglePost from "../Layouts/singlepost/SinglePost";
 import { client } from "../lib/apollo";
 
-
-export default function Single({ post,menu }) {
+export default function Single({ post, menu }) {
   const postsByCategory = post.categories.nodes[0].posts.nodes.slice(0, 4);
 
-  const relatedPosts = postsByCategory.filter((relPost) => relPost.title !== post.title);
+  const relatedPosts = postsByCategory.filter(
+    (relPost) => relPost.title !== post.title
+  );
 
-  const SEO = post.seo.fullHead
 
-  console.log(post.seo.fullHead);
   return (
     <div>
       <Head>
         <title>{post.title}</title>
-        <head dangerouslySetInnerHTML={{ __html: SEO }}></head>
+        <unwanteddiv
+        key={[]}
+        dangerouslySetInnerHTML={{
+          __html: html,
+        }}
+      />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header menu={menu} />
       <SinglePost post={post}>
         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
       </SinglePost>
-      <RelatedPosts relatedPosts= {relatedPosts}  />
+      <RelatedPosts relatedPosts={relatedPosts} />
       <Footer />
     </div>
   );
@@ -36,7 +41,7 @@ export async function getStaticPaths() {
   const result = await client.query({
     query: gql`
       query GetPosts {
-        posts(first:1000) {
+        posts(first: 1000) {
           nodes {
             slug
           }
@@ -72,7 +77,7 @@ export async function getStaticProps({ params }) {
           categories {
             nodes {
               name
-              posts(first:4) {
+              posts(first: 4) {
                 nodes {
                   title
                   slug
