@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
-import { renderToStaticMarkup } from 'react-dom/server';
 import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import RelatedPosts from "../components/widgets/relatedPosts/RelatedPosts";
 import SinglePost from "../Layouts/singlepost/SinglePost";
 import { client } from "../lib/apollo";
+import parse  from "html-react-parser"
 
 export default function Single({ post, menu }) {
   const postsByCategory = post.categories.nodes[0].posts.nodes.slice(0, 4);
@@ -14,22 +14,18 @@ export default function Single({ post, menu }) {
     (relPost) => relPost.title !== post.title
   );
 
+  const SEO = parse( post.seo.fullHead)
 
+  // console.log(post.seo.fullHead);
   return (
     <div>
       <Head>
-        <title>{post.title}</title>
-        <unwanteddiv
-        key={[]}
-        dangerouslySetInnerHTML={{
-          __html: html,
-        }}
-      />
+        {SEO}
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header menu={menu} />
       <SinglePost post={post}>
-        <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+        <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
       </SinglePost>
       <RelatedPosts relatedPosts={relatedPosts} />
       <Footer />

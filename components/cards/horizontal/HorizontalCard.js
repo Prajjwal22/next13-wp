@@ -18,27 +18,24 @@ export default function HorizontalCard({ post }) {
     <div className={styles.card}>
       <div className={styles.cardWrapper}>
         <div className={styles.cardImage}>
-        <Link href={slug}> <Image
-            src={featuredImage}
-            width={400}
-            height={300}
-            alt={postTitle}
-          /></Link>
+        <Link href={slug}><Image src={featuredImage} width={400} height={300} alt={postTitle} /></Link>
         </div>
         <div className={styles.cardContent}>
           <span className={styles.cardCategory}>{category}</span>
-          <Link href={slug}>   <span className={styles.cardTitle}>
-            {postTitle}
-          </span></Link>
-          <span className={styles.cardExcerpt} dangerouslySetInnerHTML={{ __html: excerpt }}>
-          </span>
+          <Link href={slug}><span className={styles.cardTitle}>{postTitle}</span></Link>
+          <span
+            className={styles.cardExcerpt}
+            dangerouslySetInnerHTML={{ __html: excerpt }}
+          ></span>
           <div className={styles.cardMeta}>
             <div className={styles.cardAvatar}>
               <Image src={avatar} alt={authorName} width={50} height={50} />
             </div>
             <div className={styles.cardAuthorDate}>
               <span className={styles.cardAuthor}>{authorName}</span>
-              <span className={styles.cardpubDate}>{formatDate(new Date(pubDate))}</span>
+              <span className={styles.cardpubDate}>
+                {formatDate(new Date(pubDate))}
+              </span>
             </div>
           </div>
         </div>
