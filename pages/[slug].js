@@ -45,13 +45,15 @@ export async function getStaticPaths() {
       }
     `,
   });
+  const paths = []
   return {
-    paths: result?.data?.posts?.nodes.map(({ slug }) => {
-      return {
-        params: { slug },
-      };
-    }),
-    fallback: false,
+    // paths: result?.data?.posts?.nodes.map(({ slug }) => {
+    //   return {
+    //     params: { slug },
+    //   };
+    // }),
+    paths,
+    fallback: "blocking",
   };
 }
 
