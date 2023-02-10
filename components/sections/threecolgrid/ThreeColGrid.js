@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
 import VerticalCard from "../../cards/vertical/VerticalCard";
 import styles from "./ThreeColGrid.module.scss";
 import { useRouter } from "next/router";
 
-export default function ThreeColGrid({ posts }) {
+export default function ThreeColGrid({ posts,catName }) {
 
-  const [catName, setCatName] = useState('')
-
-  useEffect(() => {
-    setCatName(window.location.pathname.split("/").pop())
-  }, [])
   
   const router = useRouter();
   return (

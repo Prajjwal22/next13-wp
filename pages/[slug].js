@@ -46,7 +46,7 @@ export async function getStaticPaths() {
     `,
   });
   return {
-    paths: result.data.posts.nodes.map(({ slug }) => {
+    paths: result?.data?.posts?.nodes.map(({ slug }) => {
       return {
         params: { slug },
       };
@@ -129,8 +129,8 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      post: result.data.postBy,
-      menu: result.data.menuItems.nodes,
+      post: result?.data?.postBy,
+      menu: result?.data?.menuItems?.nodes,
     },
     revalidate: 10,
   };

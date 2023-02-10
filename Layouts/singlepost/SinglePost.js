@@ -6,12 +6,12 @@ import { formatDate } from "../../lib/dateFormatter";
 import { usePalette } from "../../lib/usePalette";
 
 export default function SinglePost({ children, post }) {
-  const featuredImage = post.featuredImage.node.sourceUrl;
+  const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
   const avatar = post.author?.node?.avatar?.url || "/profile.png";
   const pubDate = post.modified;
-  const category = post.categories.nodes[0].name;
+  const category = post.categories.nodes[0].name
 
 
   const { data } = usePalette(featuredImage);
