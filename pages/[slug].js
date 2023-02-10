@@ -15,8 +15,6 @@ export default function Single({ post, menu }) {
   );
 
   const SEO = parse( post.seo.fullHead)
-
-  // console.log(post.seo.fullHead);
   return (
     <div>
       <Head>
@@ -73,7 +71,8 @@ export async function getStaticProps({ params }) {
           categories {
             nodes {
               name
-              posts(first: 4) {
+              slug
+              posts(first: 3) {
                 nodes {
                   title
                   slug
@@ -81,6 +80,7 @@ export async function getStaticProps({ params }) {
                   categories {
                     nodes {
                       name
+                      slug
                     }
                   }
                   excerpt

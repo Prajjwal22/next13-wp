@@ -16,12 +16,12 @@ export default function OverlayCard({ posts }) {
     <div className={styles.overlayCard}>
       <div className={styles.cardWrapper}>
         <div className={styles.cardImage}>
-          <Link href={"/" + slug}><Image
+          <Image
             src={featuredImage}
             width="800"
             height="500"
             alt="featured image"
-          /></Link>
+          />
           <div className={styles.cardContent}>
           <Link href={"/" + slug}><h3 className={styles.cardTitle}>{postTitle}</h3></Link>
             <div className={styles.cardMeta}>

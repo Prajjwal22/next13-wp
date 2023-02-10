@@ -4,7 +4,7 @@ import React from "react";
 import { formatDate } from "../../../lib/dateFormatter";
 import styles from "./VerticalCard.module.scss";
 
-export default function VerticalCard({post}) {
+export default function VerticalCard({post,catSlug}) {
 
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
@@ -14,6 +14,9 @@ export default function VerticalCard({post}) {
   const category = post?.categories?.nodes[0]?.name;
   const excerpt = post?.excerpt
   const slug = post?.slug
+
+  const fullCatSlug = catSlug === undefined ? post?.categories?.nodes[0]?.slug : catSlug
+
 
   return (
     <div className={styles.card}>
@@ -29,7 +32,7 @@ export default function VerticalCard({post}) {
           </Link>
         </div>
         <div className={styles.cardContent}>
-          <span className={styles.cardCategory}>{category}</span>
+        <Link href={"/category/" + fullCatSlug}><span className={styles.cardCategory}>{category}</span></Link>
           <Link href={"/" + slug}><span className={styles.cardTitle}>
             {postTitle}
           </span></Link>

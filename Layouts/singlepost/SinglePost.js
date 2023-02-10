@@ -4,6 +4,7 @@ import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import styles from "./SinglePost.module.scss";
 import { formatDate } from "../../lib/dateFormatter";
 import { usePalette } from "../../lib/usePalette";
+import Link from "next/link";
 
 export default function SinglePost({ children, post }) {
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
@@ -53,12 +54,12 @@ export default function SinglePost({ children, post }) {
         >
           <div className={styles.singleHeaderWrapper}>
             <div className={styles.postinfo}>
-              <span
+              <Link href={"/category/" + post.categories.nodes[0].slug}><span
                 style={{ color: data.lightVibrant }}
                 className={styles.postCategory}
               >
                {category}
-              </span>
+              </span></Link>
               <h1 className={styles.postTitle}>
                 {postTitle}
               </h1>

@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
@@ -7,16 +7,10 @@ import { client } from "../../lib/apollo";
 import ThreeColGrid from "../../components/sections/threecolgrid/ThreeColGrid";
 
 export default function Single({ post, menu,seo }) {
-  console.log(seo);
-  console.log(menu);
 
-  const [catName, setCatName] = useState('')
 
-  useEffect(() => {
-    setCatName(window.location.pathname.split("/").pop())
-  }, [])
+  const catName = post[0].categories.nodes[0].name
   
-
   return (
     <div>
       <Head>
@@ -57,7 +51,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
-  console.log(slug);
   const result = await client.query({
     query: gql`
       query PostsByCategory($slug: String!) {
@@ -83,6 +76,7 @@ export async function getStaticProps({ params }) {
             categories {
               nodes {
                 name
+                slug
                 seo {
                   fullHead
                 }

@@ -21,7 +21,7 @@ export default function HorizontalCard({ post }) {
         <Link href={slug}><Image src={featuredImage} width={400} height={300} alt={postTitle} /></Link>
         </div>
         <div className={styles.cardContent}>
-          <span className={styles.cardCategory}>{category}</span>
+        <Link href={"/category/" + post.categories.nodes[0].slug}> <span className={styles.cardCategory}>{category}</span></Link>
           <Link href={slug}><span className={styles.cardTitle}>{postTitle}</span></Link>
           <span
             className={styles.cardExcerpt}

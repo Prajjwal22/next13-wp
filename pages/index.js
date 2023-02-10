@@ -9,7 +9,6 @@ import { client } from "../lib/apollo";
 
 export default function Home({ posts, menu, content }) {
 
-  console.log(menu)
 
   return (
     <div>
@@ -45,6 +44,7 @@ export async function getStaticProps() {
             categories {
               nodes {
                 name
+                slug
               }
             }
             author {

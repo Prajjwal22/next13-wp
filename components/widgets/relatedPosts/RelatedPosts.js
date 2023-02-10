@@ -4,8 +4,6 @@ import styles from "./RelatedPosts.module.scss";
 
 export default function RelatedPosts({relatedPosts}) {
 
-  console.log(relatedPosts)
-
   return (
     <div className={styles.related}>
       <div className={styles.relatedWrapper}>

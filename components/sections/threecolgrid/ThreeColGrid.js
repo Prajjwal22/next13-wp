@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 
 export default function ThreeColGrid({ posts,catName }) {
 
+
+const catSlug =posts[0].categories.nodes[0].slug
   
   const router = useRouter();
   return (
@@ -17,7 +19,7 @@ export default function ThreeColGrid({ posts,catName }) {
               return <VerticalCard key={i} post={post} />;
             })
           : posts.map((post, i) => {
-              return <VerticalCard key={i} post={post} />;
+              return <VerticalCard key={i} catSlug={catSlug} post={post} />;
             })}
       </div>
     </div>

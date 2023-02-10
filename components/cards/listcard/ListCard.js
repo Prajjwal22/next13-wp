@@ -15,7 +15,7 @@ export default function ListCard({ post }) {
 
   return (
     <div className={styles.listCard}>
-      <div className={styles.cardCategory}>{category}</div>
+      <Link href={"/category/"+post.categories.nodes[0].slug}><div className={styles.cardCategory}>{category}</div></Link>
       <div className={styles.cardTitle}>
         <Link href={slug}>
           <h3 dangerouslySetInnerHTML={{ __html: postTitle }}></h3>
