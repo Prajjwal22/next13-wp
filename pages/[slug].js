@@ -45,15 +45,13 @@ export async function getStaticPaths() {
       }
     `,
   });
-  const paths = []
   return {
-    // paths: result?.data?.posts?.nodes.map(({ slug }) => {
-    //   return {
-    //     params: { slug },
-    //   };
-    // }),
-    paths,
-    fallback: "blocking",
+    paths: result?.data?.posts?.nodes.map(({ slug }) => {
+      return {
+        params: { slug },
+      };
+    }),
+    fallback: false,
   };
 }
 
@@ -63,7 +61,7 @@ export async function getStaticProps({ params }) {
     query: gql`
       query SinglePostBySlug($slug: String!) {
         postBy(slug: $slug) {
-          author {n
+          author {
             node {
               avatar {
                 url
