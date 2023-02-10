@@ -63,7 +63,7 @@ export async function getStaticProps({ params }) {
     query: gql`
       query SinglePostBySlug($slug: String!) {
         postBy(slug: $slug) {
-          author {
+          author {n
             node {
               avatar {
                 url
