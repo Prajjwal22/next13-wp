@@ -19,7 +19,7 @@ export default function VerticalCard({post}) {
     <div className={styles.card}>
       <div className={styles.cardWrapper}>
         <div className={styles.cardImage}>
-          <Link href={slug}>
+          <Link href={"/" + slug}>
           <Image
             src={featuredImage}
             width={400}
@@ -30,7 +30,7 @@ export default function VerticalCard({post}) {
         </div>
         <div className={styles.cardContent}>
           <span className={styles.cardCategory}>{category}</span>
-          <Link href={slug}><span className={styles.cardTitle}>
+          <Link href={"/" + slug}><span className={styles.cardTitle}>
             {postTitle}
           </span></Link>
           <span className={styles.cardExcerpt} dangerouslySetInnerHTML={{__html: excerpt}}>
