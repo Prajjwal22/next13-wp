@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['howtoshout.com','secure.gravatar.com','www.saintlad.com'],
+    domains: ['howtoshout.com','secure.gravatar.com','www.saintlad.com', 'cultofgamer.com'],
   },
 }
 

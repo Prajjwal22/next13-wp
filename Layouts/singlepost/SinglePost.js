@@ -99,7 +99,7 @@ export default function SinglePost({ children, post }) {
               src={featuredImage}
               alt={postTitle}
               width={800}
-              height={600}
+              height={700}
             />
           </div>
           <div className={styles.mainContent}>{children}</div>

@@ -14,6 +14,8 @@ export default function Single({ post, menu }) {
     (relPost) => relPost.title !== post.title
   );
 
+  console.log(relatedPosts)
+
   const SEO = parse( post.seo.fullHead)
   return (
     <div>
@@ -74,7 +76,7 @@ export async function getStaticProps({ params }) {
             nodes {
               name
               slug
-              posts(first: 3) {
+              posts(first: 4) {
                 nodes {
                   title
                   slug
