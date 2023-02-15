@@ -11,6 +11,7 @@ export default function SinglePost({ children, post }) {
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
   const avatar = post.author?.node?.avatar?.url || "/profile.png";
+  const authorSlug = "/author/" + post.author?.node?.slug
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name
 
@@ -86,7 +87,7 @@ export default function SinglePost({ children, post }) {
                   />
                 </div>
                 <div className={styles.authorMeta}>
-                  <span className={styles.authorName}>{authorName}</span>
+                  <Link href={authorSlug}><span className={styles.authorName}>{authorName}</span></Link>
                   <span className={styles.pubDate}>{formatDate(new Date(pubDate))}</span>
                 </div>
               </div>

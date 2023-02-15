@@ -9,6 +9,7 @@ export default function VerticalCard({post,catSlug}) {
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
+  const authorSlug =( "/author/" + post.author?.node?.slug )|| "";
   const avatar = post.author?.node?.avatar?.url || "/profile.png";
   const pubDate = post?.modified;
   const category = post?.categories?.nodes[0]?.name;
@@ -43,7 +44,7 @@ export default function VerticalCard({post,catSlug}) {
               <Image src={avatar} alt={authorName} width={50} height={50} />
             </div>
             <div className={styles.cardAuthorDate}>
-              <span className={styles.cardAuthor}>{authorName}</span>
+              <Link href={authorSlug}><span className={styles.cardAuthor}>{authorName}</span></Link>
               <span className={styles.cardpubDate}>{formatDate(new Date(pubDate))}</span>
             </div>
           </div>

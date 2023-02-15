@@ -11,7 +11,7 @@ export default function FeatGrid({posts}) {
                 <OverlayCard posts={posts}/>
             </div>
             <div className={styles.right}>
-              {posts.slice(1,6).map((post,i) => {
+              {posts.slice(1,5).map((post,i) => {
                 return <ListCard key={i} post = {post}/>
               })}
                 

@@ -53,6 +53,7 @@ export async function getStaticProps() {
                   url
                 }
                 name
+                slug
               }
             }
           }

@@ -8,17 +8,18 @@ import ThreeColGrid from "../../components/sections/threecolgrid/ThreeColGrid";
 
 export default function Single({ post, menu,seo }) {
 
+    console.log(post)
 
-  const catName = post[0].categories.nodes[0].name
+  const authorName = post[0]?.author?.node?.name || "Editorial Staff"
   
   return (
     <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <title>{catName + " Archives"}</title>
+        <title>{authorName + " Archives"}</title>
       </Head>
       <Header menu={menu} />
-      <ThreeColGrid archiveName={catName} posts={post} />
+      <ThreeColGrid archiveName={authorName} posts={post} />
       <Footer />
     </div>
   );
@@ -27,23 +28,17 @@ export default function Single({ post, menu,seo }) {
 export async function getStaticPaths() {
   const result = await client.query({
     query: gql`
-    query CategoriesSlug {
-      categories(first: 100, where: {hideEmpty: true, exclude: ["1"]}) {
-        nodes {
-          slug
-          categoryId
+    query AuthorSlug {
+        users {
+          nodes {
+            slug
+          }
         }
       }
-    }
     `,
   });
   const paths = []
   return {
-    // paths: result.data.categories.nodes.map(({ slug }) => {
-    //   return {
-    //     params: { slug },
-    //   };
-    // }),
     paths,
     fallback: "blocking",
   };
@@ -53,44 +48,42 @@ export async function getStaticProps({ params }) {
   const { slug } = params;
   const result = await client.query({
     query: gql`
-      query PostsByCategory($slug: String!) {
+    query GetPostsByAuthor ($slug: String!){
         menuItems {
-          nodes {
-            key: id
-            parentId
-            title: label
-            url
+            nodes {
+              key: id
+              parentId
+              title: label
+              url
+            }
           }
-        }
-        posts(where: { categoryName: $slug }) {
+        posts(where: {authorName: $slug}) {
           nodes {
+            modified
             title
-            author {
-              node {
-                name
-                slug
-                avatar {
-                  url
-                }
-              }
-            }
-            categories {
-              nodes {
-                name
-                slug
-                seo {
-                  fullHead
-                }
-              }
-            }
+            slug
             featuredImage {
               node {
                 sourceUrl(size: CNVS_THUMBNAIL)
               }
             }
+            author {
+                node {
+                  avatar {
+                    url
+                  }
+                  name
+                  description
+                  slug
+                }
+              }
             excerpt
-            modified
-            slug
+            categories {
+              nodes {
+                name
+                slug
+              }
+            }
           }
         }
       }

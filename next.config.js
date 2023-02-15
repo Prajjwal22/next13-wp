@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  trailingSlash: true,
   images: {
     domains: ['howtoshout.com','secure.gravatar.com','www.saintlad.com', 'cultofgamer.com'],
   },

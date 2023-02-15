@@ -9,9 +9,11 @@ export default function ListCard({ post }) {
   const featuredImage = post.featuredImage.node.sourceUrl;
   const postTitle = post.title;
   const authorName = post.author.node.name;
+  const authorSlug =  "/author/" + post.author.node.slug;
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name;
   const slug = post.slug;
+  
 
   return (
     <div className={styles.listCard}>
@@ -21,7 +23,7 @@ export default function ListCard({ post }) {
           <h3 dangerouslySetInnerHTML={{ __html: postTitle }}></h3>
         </Link>
         <span className={styles.cardMeta}>
-          <span className={styles.cardAuthor}>{authorName}</span>
+          <Link href={authorSlug}><span className={styles.cardAuthor}>{authorName}</span></Link>
           <span className={styles.cardTime}>
             {formatDate(new Date(pubDate))}
           </span>

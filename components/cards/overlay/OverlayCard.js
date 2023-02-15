@@ -9,6 +9,7 @@ export default function OverlayCard({ posts }) {
   const featuredImage = posts[0].featuredImage.node.sourceUrl;
   const postTitle = posts[0].title;
   const authorName = posts[0].author.node.name;
+  const authorSlug = "/author/" + posts[0].author.node.slug;
   const pubDate = posts[0].modified;
   const slug = posts[0].slug;
 
@@ -25,9 +26,9 @@ export default function OverlayCard({ posts }) {
           <div className={styles.cardContent}>
           <Link href={"/" + slug}><h3 className={styles.cardTitle}>{postTitle}</h3></Link>
             <div className={styles.cardMeta}>
-              <span className={styles.cardAuthor}>
+             <Link href={authorSlug}> <span className={styles.cardAuthor}>
                 <FaUser /> {authorName}
-              </span>
+              </span></Link>
               <span className={styles.cardDate}>
                 <FaClock />
                 {formatDate(new Date(pubDate))}
