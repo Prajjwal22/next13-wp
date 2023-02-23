@@ -10,10 +10,18 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import Link from "next/link";
+import Search from "../search/Search";
 
 export default function Header({menu}) {
 
   const [open, setOpen] = useState(false);
+  
+  const [isSearch, setIsSearch] = useState(false)
+
+
+  const handleSearch = () => {
+    setIsSearch(true)
+  }
 
   useEffect(() => {
     document.body.classList.toggle("mobileNav-Open", open);
@@ -21,6 +29,7 @@ export default function Header({menu}) {
 
   return (
     <header className={styles.header}>
+      {isSearch && <Search isSearch={isSearch} setIsSearch={setIsSearch}/>}
       <div className={styles.headerWrapper}>
         <div className={styles.brand}>
           <Link href="/"><Image src="/logo.png" alt="brand name" width={250} height={60} /></Link>
@@ -31,6 +40,11 @@ export default function Header({menu}) {
               return <Link key={i} href={item.url}><span className={styles.navLink}>{item.title}</span></Link>
             })}
           </div>
+        </div>
+        <div onClick={()=>handleSearch()} className={styles.search}>
+          <span className={styles.socialLink}>
+            <FaSearch size={20}/>
+          </span>
         </div>
         <div className={styles.socials}>
           <div className={styles.socialHandles}>
@@ -62,9 +76,6 @@ export default function Header({menu}) {
                 }}
               />
             )}
-          </span>
-          <span>
-            <FaSearch size={20} />
           </span>
           {open && (
             <div className={styles.mobileNav}>

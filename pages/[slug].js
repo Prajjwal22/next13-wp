@@ -95,6 +95,7 @@ export async function getStaticProps({ params }) {
                         url
                       }
                       name
+                      slug
                     }
                   }
                   featuredImage {

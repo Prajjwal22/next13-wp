@@ -23,6 +23,8 @@ export default function OverlayCard({ posts }) {
             height="500"
             alt="featured image"
           />
+
+          <div className={styles.overlayGradient}></div>
           <div className={styles.cardContent}>
           <Link href={"/" + slug}><h3 className={styles.cardTitle}>{postTitle}</h3></Link>
             <div className={styles.cardMeta}>

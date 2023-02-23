@@ -1,0 +1,82 @@
+@import '../../styles/_media.scss';
+
+
+.search {
+    width: 100dvw;
+    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(4 20 35 / 90%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: #b4b4b4;
+    padding: 10rem;
+    z-index: 9999 !important;
+    position: relative;
+
+    @include for-phone-only {
+        padding: 10rem 3rem;
+    }
+
+    .searchModal {
+        width: 700px;
+        min-height: 300px;
+        background-color: #1E293B;
+        border-radius: 8px;
+        .searchWrapper {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            .searchControls {
+                display: flex;
+                width: 100%;
+                gap: 20px;
+                justify-content: space-between;
+                border-bottom: 1px solid #e2e8f00d;
+                align-items: center;
+                padding: 1rem;
+                .searchInput{
+                    border: none;
+                    background-color: transparent !important;
+                    width: 100%;
+                    font-size: 1.1em;
+                    color: #b4b4b4;
+                    
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                .searchClose{
+                    background: #fcfdff3c !important;
+                    border: transparent;
+                    padding: 6px 3px;
+                    border-radius: 5px;
+                    color: #eeeeee;
+                    font-size: .7em;
+                }
+            }
+
+            .searchResults {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                .result {
+                    width: 100%;
+                    height: 100%;
+                    border-bottom: 1px solid #e2e8f00d;
+                    padding: 1rem 2rem;
+                    &:hover {
+                        background-color: #3137415a;
+                    }
+                }
+            }
+        }
+    }
+}
