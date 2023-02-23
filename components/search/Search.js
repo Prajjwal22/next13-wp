@@ -59,7 +59,7 @@ export default function Search({ setIsSearch }) {
           </div>
           <div className={styles.searchResults}>
             { loading ? <span>Loading...</span> :   !data ? <span>No recent searches</span>  : data?.posts?.nodes.length === 0 ?  <span>No results found</span> : (data?.posts?.nodes)?.map ((results, i)=> {
-              return <div className={styles.result}>
+              return <div key={i} className={styles.result}>
                 <span className={styles.resultText}>
                 <Link href={"/" + results.slug}>{results.title}</Link>
                 </span>
