@@ -33,10 +33,15 @@ export default function ThreeColGrid({ posts, archiveName }) {
             <div className={styles.authorInfo}>
               <p>{posts[0].author.node.description}</p>
               <span className={styles.authorSocial}>
-                <span><FaFacebook size={20}/></span>
-                <span><FaTwitter size={20}/></span>
-                <span><FaEnvelope size={20}/></span>
-
+                <span>
+                  <FaFacebook size={20} />
+                </span>
+                <span>
+                  <FaTwitter size={20} />
+                </span>
+                <span>
+                  <FaEnvelope size={20} />
+                </span>
               </span>
             </div>
           </div>

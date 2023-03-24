@@ -74,6 +74,27 @@ h3 {
   }
 }
 
+.loading-icon {
+  font-size: 2rem;
+  animation: animate 2s infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+.center {
+margin:auto;
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
 .primaryBtn {
   background: rgb(67, 59, 226);
   color: #fff;
