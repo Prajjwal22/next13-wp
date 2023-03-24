@@ -64,7 +64,7 @@ export async function getStaticProps({ params }) {
             slug
             featuredImage {
               node {
-                sourceUrl(size: CNVS_THUMBNAIL)
+                sourceUrl(size: LARGE)
               }
             }
             author {

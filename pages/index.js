@@ -41,7 +41,7 @@ export async function getStaticProps() {
             modified
             featuredImage {
               node {
-                sourceUrl(size: CSCO_MEDIUM)
+                sourceUrl(size: LARGE)
               }
             }
             excerpt

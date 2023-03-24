@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   trailingSlash: true,
   images: {
-    domains: ['howtoshout.com','secure.gravatar.com','www.saintlad.com', 'cultofgamer.com'],
+    domains: ['api.howtoshout.com', 'howtoshout.com','secure.gravatar.com','www.saintlad.com', 'cultofgamer.com'],
   },
 }
 

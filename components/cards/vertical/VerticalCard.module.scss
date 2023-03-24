@@ -20,12 +20,13 @@
                 max-width: 100%;
                 object-fit: cover;
                 transition: all .3s;
+
                 &:hover {
                     opacity: 1;
                     box-shadow: 0 15px 45px -5px rgb(7 10 25 / 25%);
                     -webkit-filter: brightness(1.07);
                     filter: brightness(1.07);
-                    transform: translate(0,-2px);
+                    transform: translate(0, -2px);
                 }
             }
         }
@@ -55,6 +56,10 @@
                 color: #626365;
                 font-weight: 300;
                 line-height: 1.5rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
             }
 
             .cardMeta {

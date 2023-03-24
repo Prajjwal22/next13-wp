@@ -85,7 +85,7 @@ export async function getStaticProps({ params }) {
             }
             featuredImage {
               node {
-                sourceUrl(size: CNVS_THUMBNAIL)
+                sourceUrl(size: LARGE)
               }
             }
             excerpt
