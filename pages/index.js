@@ -10,10 +10,7 @@ import InfiniteScrollList from "../components/sections/threecolgrid/ThreeColGrid
 import LoadMoreList from "../components/sections/threecolgrid/ThreeColGridV2";
 import { client } from "../lib/apollo";
 
-export default function Home({ posts, menu, content }) {
-
-  
-
+export default function Home({ posts, menu, footerMenu }) {
 
   return (
     <>
@@ -27,7 +24,7 @@ export default function Home({ posts, menu, content }) {
       <ListPosts posts={posts} />
       {/* <ThreeColGrid posts={posts} /> */}
       <LoadMore />
-      <Footer />
+      <Footer footerMenu={footerMenu} />
     </>
   );
 }
@@ -64,22 +61,34 @@ export async function getStaticProps() {
             }
           }
         }
-        menuItems {
-          nodes {
-            key: id
-            parentId
-            title: label
-            url
-          }
-        }
+        Navigation: menu(id: "dGVybToxMw==") {
+          menuItems {
+                 nodes {
+                   key: id
+                   title: label
+                   uri
+                 }
+               }
+         }
+        menu(id: "dGVybToz") {
+          menuItems {
+                 nodes {
+                   key: id
+                   title: label
+                   uri
+                 }
+               }
+         }
       }
     `,
   });
 
   return {
     props: {
-      menu: result.data.menuItems.nodes,
+      menu: result?.data?.Navigation.menuItems?.nodes,
       posts: result.data.posts.nodes,
+      footerMenu: result?.data.menu.menuItems?.nodes,
+
     },
     revalidate: 10,
   };

@@ -11,27 +11,37 @@ export default function Search({ setIsSearch }) {
   
 
   const SEARCH_RESULTS = gql`
-    query GetPostsBySearch($query: String!) {
-      posts(first: 10, where: { search: $query }) {
-        nodes {
-          title
-          excerpt
-          slug
-        }
+  query GetPostsBySearch($query: String!, $after: String) {
+    searchPosts: posts(first: 10, after: $after, where: { search: $query }) {
+      nodes {
+        title
+        excerpt
+        slug
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
       }
     }
-  `;
+  }
+`;
+
+
   console.log(query);
   const [executeSearch, { data,loading }] = useLazyQuery(SEARCH_RESULTS);
 
 
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
-    executeSearch({
-      variables: { query },
-    });
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    if (newQuery !== query) {
+      executeSearch({
+        variables: { query: newQuery },
+      });
+    }
   };
+  
   console.log(query);
   console.log(data);
 
@@ -58,7 +68,7 @@ export default function Search({ setIsSearch }) {
             </button>
           </div>
           <div className={styles.searchResults}>
-            { loading ? <span>Loading...</span> :   !data ? <span>No recent searches</span>  : data?.posts?.nodes.length === 0 ?  <span>No results found</span> : (data?.posts?.nodes)?.map ((results, i)=> {
+            { loading ? <span>Loading...</span> :   !data ? <span>No recent searches</span>  : data?.searchPosts?.nodes.length === 0 ?  <span>No results found</span> : (data?.searchPosts?.nodes)?.map ((results, i)=> {
               return <div key={i} className={styles.result}>
                 <span className={styles.resultText}>
                 <Link href={"/" + results.slug}>{results.title}</Link>

@@ -7,8 +7,6 @@ import { FaEnvelope, FaFacebook, FaTwitter } from "react-icons/fa";
 export default function ThreeColGrid({ posts, archiveName }) {
   const catSlug = posts[0].categories.nodes[0].slug;
 
-  console.log(posts);
-
   const router = useRouter();
   return (
     <div className={styles.threecolGrid}>
@@ -52,10 +50,10 @@ export default function ThreeColGrid({ posts, archiveName }) {
           ? posts.slice(9, 18).map((post, i) => {
               return <VerticalCard key={i} post={post} />;
             })
-          : posts.map((post, i) => {
+          : posts.map((post, index) => {
               return (
                 <>
-                  <VerticalCard key={i} catSlug={catSlug} post={post} />
+                  <VerticalCard key={index} catSlug={catSlug} post={post} />
                 </>
               );
             })}

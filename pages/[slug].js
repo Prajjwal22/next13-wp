@@ -7,16 +7,18 @@ import SinglePost from "../Layouts/singlepost/SinglePost";
 import { client } from "../lib/apollo";
 import parse  from "html-react-parser"
 
-export default function Single({ post, menu }) {
+export default function Single({ post, menu, footerMenu }) {
   const postsByCategory = post.categories.nodes[0].posts.nodes.slice(0, 4);
 
   const relatedPosts = postsByCategory.filter(
     (relPost) => relPost.title !== post.title
   );
 
-  console.log(relatedPosts)
+  const yoastData = post.seo.fullHead.replace(/api.howtoshout.com/g, "howtoshout.com") 
 
-  const SEO = parse( post.seo.fullHead)
+  const SEO = parse(yoastData)
+
+  console.log()
   return (
     <div>
       <Head>
@@ -29,7 +31,7 @@ export default function Single({ post, menu }) {
         <div dangerouslySetInnerHTML={{ __html: post?.content }}></div>
       </SinglePost>
       <RelatedPosts relatedPosts={relatedPosts} />
-      <Footer />
+      <Footer footerMenu={footerMenu} />
     </div>
   );
 }
@@ -121,14 +123,24 @@ export async function getStaticProps({ params }) {
           fullHead
         }
       }
-      menuItems {
-        nodes {
-          key: id
-          parentId
-          title: label
-          url
-        }
-      }
+      Navigation: menu(id: "dGVybToxMw==") {
+        menuItems {
+               nodes {
+                 key: id
+                 title: label
+                 uri
+               }
+             }
+       }
+      menu(id: "dGVybToz") {
+        menuItems {
+               nodes {
+                 key: id
+                 title: label
+                 uri
+               }
+             }
+       }
     }
     `,
     variables: { slug },
@@ -137,7 +149,8 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       post: result?.data?.postBy,
-      menu: result?.data?.menuItems?.nodes,
+      menu: result?.data?.Navigation.menuItems?.nodes,
+      footerMenu: result?.data.menu.menuItems?.nodes,
     },
     revalidate: 10,
   };

@@ -5,21 +5,28 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import { client } from "../../lib/apollo";
 import ThreeColGrid from "../../components/sections/threecolgrid/ThreeColGrid";
+import parse  from "html-react-parser"
 
-export default function Single({ post, menu,seo }) {
+export default function Single({ post, menu, footerMenu }) {
+  const catName = post[0].categories.nodes[0].name;
+  const yoastData = post[0].categories.nodes[0].seo.fullHead.replace(
+    /api.howtoshout.com/g,
+    "howtoshout.com"
+  );
+  const SEO = parse(yoastData);
 
+  console.log(footerMenu)
 
-  const catName = post[0].categories.nodes[0].name
-  
   return (
     <div>
       <Head>
+        {SEO}
         <link rel="icon" href="/favicon.ico" />
         <title>{catName + " Archives"}</title>
       </Head>
       <Header menu={menu} />
       <ThreeColGrid archiveName={catName} posts={post} />
-      <Footer />
+      <Footer footerMenu={footerMenu} />
     </div>
   );
 }
@@ -27,19 +34,20 @@ export default function Single({ post, menu,seo }) {
 export async function getStaticPaths() {
   const result = await client.query({
     query: gql`
-    query CategoriesSlug {
-      categories(first: 100, where: {hideEmpty: true, exclude: ["1"]}) {
-        nodes {
-          slug
-          categoryId
+      query CategoriesSlug {
+        categories(first: 100) {
+          nodes {
+            slug
+            databaseId
+          }
         }
       }
-    }
     `,
   });
-  const paths = []
+  const paths = [];
   return {
-    // paths: result.data.categories.nodes.map(({ slug }) => {
+    // paths: result.data.categories.
+    // nodes.map(({ slug }) => {
     //   return {
     //     params: { slug },
     //   };
@@ -54,14 +62,24 @@ export async function getStaticProps({ params }) {
   const result = await client.query({
     query: gql`
       query PostsByCategory($slug: String!) {
-        menuItems {
-          nodes {
-            key: id
-            parentId
-            title: label
-            url
-          }
-        }
+        Navigation: menu(id: "dGVybToxMw==") {
+          menuItems {
+                 nodes {
+                   key: id
+                   title: label
+                   uri
+                 }
+               }
+         }
+        menu(id: "dGVybToz") {
+          menuItems {
+                 nodes {
+                   key: id
+                   title: label
+                   uri
+                 }
+               }
+         }
         posts(where: { categoryName: $slug }) {
           nodes {
             title
@@ -101,8 +119,8 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       post: result?.data?.posts?.nodes,
-      menu: result?.data?.menuItems?.nodes,
-      seo: result?.data
+      menu: result?.data?.Navigation.menuItems?.nodes,
+      footerMenu: result?.data.menu.menuItems?.nodes,
     },
     revalidate: 10,
   };

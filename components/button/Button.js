@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function Button({label, type, center, icon}) {
+export default function Button({onClick, label, type, center, icon}) {
 
    center = "center"
 
   return (
     <div>
-      <button className={`${type} ctaBtn ${center}`}>{icon} {label}</button>
+      <button onClick={onClick} className={`${type} ctaBtn ${center}`}>{icon} {label}</button>
     </div>
   );
 }

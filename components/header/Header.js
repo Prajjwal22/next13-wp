@@ -14,8 +14,6 @@ import Search from "../search/Search";
 
 export default function Header({menu}) {
 
-  console.log(menu)
-
   const [open, setOpen] = useState(false);
   
   const [isSearch, setIsSearch] = useState(false)
@@ -39,7 +37,7 @@ export default function Header({menu}) {
         <div className={styles.navigation}>
           <div className={styles.navigatinMenu}>
             {menu.slice(1,6).map((item, i) => {
-              return <Link key={i} href={item.url}><span className={styles.navLink}>{item.title}</span></Link>
+              return <Link key={i} href={item.uri}><span className={styles.navLink}>{item.title}</span></Link>
             })}
           </div>
         </div>

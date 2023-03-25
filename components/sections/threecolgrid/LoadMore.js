@@ -5,40 +5,39 @@ import Image from "next/image";
 import { FaEnvelope, FaFacebook, FaTwitter } from "react-icons/fa";
 import { gql, useQuery } from "@apollo/client";
 import Button from "../../button/Button";
-import {FiCommand} from "react-icons/fi"
+import { FiCommand } from "react-icons/fi";
+import { useState } from "react";
 
 const GET_POSTS = gql`
-  query getPosts($first: Int!, $after: String) {
+  query GetPosts($first: Int!, $after: String) {
     posts(first: $first, after: $after) {
       pageInfo {
         hasNextPage
         endCursor
       }
-      edges {
-        node {
-          title
-          slug
-          modified
-          featuredImage {
-            node {
-              sourceUrl(size: LARGE)
-            }
+      nodes {
+        title
+        slug
+        modified
+        featuredImage {
+          node {
+            sourceUrl(size: LARGE)
           }
-          excerpt
-          categories {
-            nodes {
-              name
-              slug
-            }
+        }
+        excerpt
+        categories {
+          nodes {
+            name
+            slug
           }
-          author {
-            node {
-              avatar {
-                url
-              }
-              name
-              slug
+        }
+        author {
+          node {
+            avatar {
+              url
             }
+            name
+            slug
           }
         }
       }
@@ -46,19 +45,49 @@ const GET_POSTS = gql`
   }
 `;
 
-const BATCH_SIZE = 9;
+const POSTS_PER_PAGE = 9;
 
 export default function LoadMore({ archiveName }) {
-  //   const catSlug = posts[0].categories.nodes[0].slug;
-
-  //   console.log(posts);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
-  const { data, loading, error, fetchMore } = useQuery(GET_POSTS, {
-    variables: { first: BATCH_SIZE, after: null },
-    notifyOnNetworkStatusChange: true,
+  const { data, error, fetchMore } = useQuery(GET_POSTS, {
+    variables: {
+      first: POSTS_PER_PAGE,
+    },
+    onFetchMore: () => {
+      setLoading(true);
+    },
+    onError: () => {
+      setLoading(false);
+    },
+    onCompleted: () => {
+      setLoading(false);
+    },
   });
+
+  const handleLoadMore = () => {
+    setLoading(true);
+
+    fetchMore({
+      variables: {
+        after: pageInfo.endCursor,
+      },
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prevResult;
+
+        return {
+          posts: {
+            pageInfo: fetchMoreResult.posts.pageInfo,
+            nodes: [...prevResult.posts.nodes, ...fetchMoreResult.posts.nodes],
+            __typename: prevResult.posts.__typename,
+          },
+        };
+      },
+    });
+  };
+
 
   if (error) {
     return <p>Sorry, an error has occurred. Please reload the page.</p>;
@@ -68,12 +97,14 @@ export default function LoadMore({ archiveName }) {
     return <p>Loading...</p>;
   }
 
-  if (!data?.posts.edges.length) {
+  if (!data?.posts.nodes.length) {
     return <p>No posts have been published.</p>;
   }
 
-  const posts = data.posts.edges.map((edge) => edge.node);
-  const haveMorePosts = Boolean(data?.posts?.pageInfo?.hasNextPage);
+  if (loading && !data) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const { nodes, pageInfo } = data.posts;
 
   return (
     <div className={styles.threecolGrid}>
@@ -114,33 +145,31 @@ export default function LoadMore({ archiveName }) {
       )}
       <div className={styles.gridWrapper}>
         {router.pathname === "/"
-          ? posts.map((post, i) => {
+          ? nodes.map((post, i) => {
               return <VerticalCard key={i} post={post} />;
             })
-          : posts.map((post, i) => {
+          : nodes.map((post, i) => {
               return (
                 <>
                   <VerticalCard key={i} catSlug={catSlug} post={post} />
                 </>
               );
             })}
-      
       </div>
-      {haveMorePosts ? (
-          <form
-            method="post"
-            onSubmit={(event) => {
-              event.preventDefault();
-              fetchMore({
-                variables: { after: data.posts.pageInfo.endCursor },
-              });
-            }}
-          >
-            <Button label={loading ? "Loading..." : "Load More"} icon={<FiCommand className={loading ? "loading-icon" : ""} size={20}/>} center type="primaryBtn"/>
-          </form>
-        ) : (
-          <p>✅ All posts loaded.</p>
-        )}
+
+      {pageInfo.hasNextPage ? (
+        <Button
+          onClick={handleLoadMore}
+          label={loading ? "Loading..." : "Load More"}
+          icon={
+            <FiCommand className={loading ? "loading-icon" : ""} size={20} />
+          }
+          center
+          type="primaryBtn"
+        />
+      ) : (
+        <p>✅ All posts loaded.</p>
+      )}
     </div>
   );
 }

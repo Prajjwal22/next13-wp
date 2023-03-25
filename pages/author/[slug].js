@@ -6,9 +6,8 @@ import Header from "../../components/header/Header";
 import { client } from "../../lib/apollo";
 import ThreeColGrid from "../../components/sections/threecolgrid/ThreeColGrid";
 
-export default function Single({ post, menu,seo }) {
+export default function Single({ post, menu,seo, footerMenu }) {
 
-    console.log(post)
 
   const authorName = post[0]?.author?.node?.name || "Editorial Staff"
   
@@ -20,7 +19,7 @@ export default function Single({ post, menu,seo }) {
       </Head>
       <Header menu={menu} />
       <ThreeColGrid archiveName={authorName} posts={post} />
-      <Footer />
+      <Footer footerMenu={footerMenu} />
     </div>
   );
 }
@@ -49,14 +48,24 @@ export async function getStaticProps({ params }) {
   const result = await client.query({
     query: gql`
     query GetPostsByAuthor ($slug: String!){
+      Navigation: menu(id: "dGVybToxMw==") {
         menuItems {
-            nodes {
-              key: id
-              parentId
-              title: label
-              url
-            }
-          }
+               nodes {
+                 key: id
+                 title: label
+                 uri
+               }
+             }
+       }
+       menu(id: "dGVybToz") {
+        menuItems {
+               nodes {
+                 key: id
+                 title: label
+                 uri
+               }
+             }
+       }
         posts(where: {authorName: $slug}) {
           nodes {
             modified
@@ -94,8 +103,10 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       post: result?.data?.posts?.nodes,
-      menu: result?.data?.menuItems?.nodes,
-      seo: result?.data
+      menu: result?.data?.Navigation.menuItems?.nodes,
+      seo: result?.data,
+      footerMenu: result?.data.menu.menuItems?.nodes,
+
     },
     revalidate: 10,
   };
