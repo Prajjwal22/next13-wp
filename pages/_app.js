@@ -2,10 +2,10 @@ import "../styles/globals.scss";
 import localFont from "@next/font/local";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../lib/apollo";
-import Head from 'next/head'
-import NProgress from 'nprogress'; 
-import Router from 'next/router';
-import 'nprogress/nprogress.css';
+import Head from "next/head";
+import NProgress from "nprogress";
+import Router from "next/router";
+import "nprogress/nprogress.css";
 
 const gtWalsheim = localFont({
   src: [
@@ -42,25 +42,17 @@ const gtWalsheim = localFont({
   ],
 });
 
-
-//Route Events. 
-Router.events.on('routeChangeStart', () => NProgress.start()); 
-Router.events.on('routeChangeComplete', () => NProgress.done()); 
-Router.events.on('routeChangeError', () => NProgress.done());
-
+//Route Events.
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <Head>
-               <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs    /nprogress/0.2.0/nprogress.min.css"
-          />
-             </Head>
-    <main className={gtWalsheim.className}>
-      <Component {...pageProps} />
-    </main>
+      <main className={gtWalsheim.className}>
+        <Component {...pageProps} />
+      </main>
     </ApolloProvider>
   );
 }

@@ -16,7 +16,7 @@ export default function SinglePost({ children, post }) {
   const category = post.categories.nodes[0].name
 
 
-  const { data } = usePalette(featuredImage);
+  const { data } = usePalette("/_next/image/?url=" + featuredImage + "&w=828&q=75");
 
   const [scroll, setScroll] = useState(0);
 
@@ -101,6 +101,7 @@ export default function SinglePost({ children, post }) {
               alt={postTitle}
               width={800}
               height={700}
+              priority
             />
           </div>
           <div className={styles.mainContent}>{children}</div>

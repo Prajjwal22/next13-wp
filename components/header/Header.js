@@ -14,6 +14,8 @@ import Search from "../search/Search";
 
 export default function Header({menu}) {
 
+  console.log(menu)
+
   const [open, setOpen] = useState(false);
   
   const [isSearch, setIsSearch] = useState(false)

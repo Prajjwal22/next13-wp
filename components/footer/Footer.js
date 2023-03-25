@@ -19,7 +19,7 @@ export default function Footer() {
         </div>
         <div className={styles.footerContent}>
           <div className={styles.brand}>
-            <Image src="/logo.png" alt="footer logo" width={250} height={70} />
+            <Image src="https://api.howtoshout.com/wp-content/uploads/2017/09/Howtoshout-logo-e1504411427566.png.webp" alt="footer logo" width={250} height={70} />
           </div>
           <div className={styles.footerNav}>
             <span className={styles.navLink}>Home</span>
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
         <div className={styles.copyRight}>
           <span className={styles.copyRightText}>
-            Your Website Name. All Rights Reserved
+            HowToShout. All Rights Reserved
           </span>
           <span className={styles.copyRightText}>
             Made ❤️ by Bunny Ji.

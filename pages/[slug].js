@@ -22,6 +22,7 @@ export default function Single({ post, menu }) {
       <Head>
         {SEO}
         <link rel="icon" href="/favicon.ico" />
+        <title>{post.title + " - HowToShout"}</title>
       </Head>
       <Header menu={menu} />
       <SinglePost post={post}>
@@ -61,74 +62,74 @@ export async function getStaticProps({ params }) {
   const { slug } = params;
   const result = await client.query({
     query: gql`
-      query SinglePostBySlug($slug: String!) {
-        postBy(slug: $slug) {
-          author {
-            node {
-              avatar {
-                url
-              }
-              name
-              slug
+    query SinglePostBySlug($slug: String!) {
+      postBy(slug: $slug) {
+        author {
+          node {
+            avatar {
+              url
             }
+            name
+            slug
           }
-          postId
-          categories {
-            nodes {
-              name
-              slug
-              posts(first: 4) {
-                nodes {
-                  title
-                  slug
-                  modified
-                  categories {
-                    nodes {
-                      name
-                      slug
-                    }
+        }
+        postId
+        categories {
+          nodes {
+            name
+            slug
+            posts(first: 4) {
+              nodes {
+                title
+                slug
+                modified
+                categories {
+                  nodes {
+                    name
+                    slug
                   }
-                  excerpt
-                  author {
-                    node {
-                      avatar {
-                        url
-                      }
-                      name
-                      slug
+                }
+                excerpt
+                author {
+                  node {
+                    avatar {
+                      url
                     }
+                    name
+                    slug
                   }
-                  featuredImage {
-                    node {
-                      sourceUrl(size: LARGE)
-                    }
+                }
+                featuredImage {
+                  node {
+                    sourceUrl(size: LARGE)
                   }
                 }
               }
             }
           }
-          featuredImage {
-            node {
-              sourceUrl(size: LARGE)
-            }
-          }
-          modified
-          slug
-          title
-          content
-          seo {
-            fullHead
+        }
+        featuredImage {
+          node {
+            sourceUrl(size: CSCO_LARGE)
           }
         }
-        menuItems {
-          nodes {
-            key: id
-            parentId
-            title: label
-            url
-          }
+        modified
+        slug
+        title
+        content
+        seo {
+          fullHead
         }
       }
+      menuItems {
+        nodes {
+          key: id
+          parentId
+          title: label
+          url
+        }
+      }
+    }
     `,
     variables: { slug },
   });
