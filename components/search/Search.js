@@ -8,29 +8,24 @@ import styles from "./Search.module.scss";
 export default function Search({ setIsSearch }) {
   const [query, setQuery] = useState("");
 
-  
-
   const SEARCH_RESULTS = gql`
-  query GetPostsBySearch($query: String!, $after: String) {
-    searchPosts: posts(first: 10, after: $after, where: { search: $query }) {
-      nodes {
-        title
-        excerpt
-        slug
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
+    query GetPostsBySearch($query: String!, $after: String) {
+      searchPosts: posts(first: 10, after: $after, where: { search: $query }) {
+        nodes {
+          title
+          excerpt
+          slug
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
       }
     }
-  }
-`;
-
+  `;
 
   console.log(query);
-  const [executeSearch, { data,loading }] = useLazyQuery(SEARCH_RESULTS);
-
-
+  const [executeSearch, { data, loading }] = useLazyQuery(SEARCH_RESULTS);
 
   const handleChange = (e) => {
     const newQuery = e.target.value;
@@ -41,12 +36,14 @@ export default function Search({ setIsSearch }) {
       });
     }
   };
-  
-  console.log(query);
-  console.log(data);
 
   return (
-    <div className={styles.search}>
+    <div
+      onKeyDown={(e) => {
+        if (e.key === "Escape") setIsSearch(false);
+      }}
+      className={styles.search}
+    >
       <div className={styles.searchModal}>
         <div className={styles.searchWrapper}>
           <div className={styles.searchControls}>
@@ -56,6 +53,7 @@ export default function Search({ setIsSearch }) {
             <input
               id="docsearch-input"
               type="search"
+              autoFocus
               className={styles.searchInput}
               placeholder="Search..."
               onChange={(e) => handleChange(e)}
@@ -68,14 +66,28 @@ export default function Search({ setIsSearch }) {
             </button>
           </div>
           <div className={styles.searchResults}>
-            { loading ? <span>Loading...</span> :   !data ? <span>No recent searches</span>  : data?.searchPosts?.nodes.length === 0 ?  <span>No results found</span> : (data?.searchPosts?.nodes)?.map ((results, i)=> {
-              return <div key={i} className={styles.result}>
-                <span className={styles.resultText}>
-                <Link onClick={()=>setIsSearch(false)}  href={"/" + results.slug}>{results.title}</Link>
-                </span>
-                </div>
-            })
-            }
+            {loading ? (
+              <span>Loading...</span>
+            ) : !data ? (
+              <span>No recent searches</span>
+            ) : data?.searchPosts?.nodes.length === 0 ? (
+              <span>No results found</span>
+            ) : (
+              data?.searchPosts?.nodes?.map((results, i) => {
+                return (
+                  <div key={i} className={styles.result}>
+                    <span className={styles.resultText}>
+                      <Link
+                        onClick={() => setIsSearch(false)}
+                        href={"/" + results.slug}
+                      >
+                        {results.title}
+                      </Link>
+                    </span>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </div>
