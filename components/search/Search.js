@@ -71,7 +71,7 @@ export default function Search({ setIsSearch }) {
             { loading ? <span>Loading...</span> :   !data ? <span>No recent searches</span>  : data?.searchPosts?.nodes.length === 0 ?  <span>No results found</span> : (data?.searchPosts?.nodes)?.map ((results, i)=> {
               return <div key={i} className={styles.result}>
                 <span className={styles.resultText}>
-                <Link href={"/" + results.slug}>{results.title}</Link>
+                <Link onClick={()=>setIsSearch(false)}  href={"/" + results.slug}>{results.title}</Link>
                 </span>
                 </div>
             })

@@ -2,7 +2,6 @@ import "../styles/globals.scss";
 import localFont from "@next/font/local";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../lib/apollo";
-import Head from "next/head";
 import NProgress from "nprogress";
 import Router from "next/router";
 import "nprogress/nprogress.css";
