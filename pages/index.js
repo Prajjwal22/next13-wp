@@ -41,6 +41,7 @@ export async function getStaticProps() {
             featuredImage {
               node {
                 sourceUrl(size: LARGE)
+                dataUrl
               }
             }
             excerpt

@@ -7,6 +7,7 @@ import styles from "./ListCard.module.scss";
 export default function ListCard({ post }) {
   
   const featuredImage = post.featuredImage.node.sourceUrl;
+  const base64URL = post.featuredImage.node.dataUrl;
   const postTitle = post.title;
   const authorName = post.author.node.name;
   const authorSlug =  "/author/" + post.author.node.slug;
@@ -30,7 +31,8 @@ export default function ListCard({ post }) {
         </span>
       </div>
       <div className={styles.cardThumb}>
-        <Image width={100} height={100} src={featuredImage} alt="post title" />
+        <Image width={100} height={100} src={featuredImage}    placeholder="blur"
+            blurDataURL={`"${base64URL}"`} alt="post title" />
       </div>
     </div>
   );

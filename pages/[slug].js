@@ -5,7 +5,7 @@ import Header from "../components/header/Header";
 import RelatedPosts from "../components/widgets/relatedPosts/RelatedPosts";
 import SinglePost from "../Layouts/singlepost/SinglePost";
 import { client } from "../lib/apollo";
-import parse  from "html-react-parser"
+import parse from "html-react-parser";
 
 export default function Single({ post, menu, footerMenu }) {
   const postsByCategory = post.categories.nodes[0].posts.nodes.slice(0, 4);
@@ -14,15 +14,19 @@ export default function Single({ post, menu, footerMenu }) {
     (relPost) => relPost.title !== post.title
   );
 
-  const yoastData = post.seo.fullHead.replace(/api.howtoshout.com/g, "howtoshout.com") 
+  const yoastData = post.seo.fullHead.replace(
+    /api.howtoshout.com/g,
+    "howtoshout.com"
+  );
 
-  const SEO = parse(yoastData)
+  const SEO = parse(yoastData);
 
-  console.log()
+  console.log();
   return (
     <div>
       <Head>
         {SEO}
+        <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         <title>{post.title + " - HowToShout"}</title>
       </Head>
@@ -48,7 +52,7 @@ export async function getStaticPaths() {
       }
     `,
   });
-  const paths = []
+  const paths = [];
   return {
     // paths: result?.data?.posts?.nodes.map(({ slug }) => {
     //   return {
@@ -64,84 +68,85 @@ export async function getStaticProps({ params }) {
   const { slug } = params;
   const result = await client.query({
     query: gql`
-    query SinglePostBySlug($slug: String!) {
-      postBy(slug: $slug) {
-        author {
-          node {
-            avatar {
-              url
+      query SinglePostBySlug($slug: String!) {
+        postBy(slug: $slug) {
+          author {
+            node {
+              avatar {
+                url
+              }
+              name
+              slug
             }
-            name
-            slug
           }
-        }
-        postId
-        categories {
-          nodes {
-            name
-            slug
-            posts(first: 4) {
-              nodes {
-                title
-                slug
-                modified
-                categories {
-                  nodes {
-                    name
-                    slug
-                  }
-                }
-                excerpt
-                author {
-                  node {
-                    avatar {
-                      url
+          postId
+          categories {
+            nodes {
+              name
+              slug
+              posts(first: 4) {
+                nodes {
+                  title
+                  slug
+                  modified
+                  categories {
+                    nodes {
+                      name
+                      slug
                     }
-                    name
-                    slug
                   }
-                }
-                featuredImage {
-                  node {
-                    sourceUrl(size: LARGE)
+                  excerpt
+                  author {
+                    node {
+                      avatar {
+                        url
+                      }
+                      name
+                      slug
+                    }
+                  }
+                  featuredImage {
+                    node {
+                      sourceUrl(size: LARGE)
+                      dataUrl
+                    }
                   }
                 }
               }
             }
           }
-        }
-        featuredImage {
-          node {
-            sourceUrl(size: CSCO_LARGE)
+          featuredImage {
+            node {
+              sourceUrl(size: CSCO_LARGE)
+            }
+          }
+          modified
+          slug
+          title
+          content
+          seo {
+            fullHead
           }
         }
-        modified
-        slug
-        title
-        content
-        seo {
-          fullHead
+        Navigation: menu(id: "dGVybToxMw==") {
+          menuItems {
+            nodes {
+              key: id
+              title: label
+              uri
+            }
+          }
+        }
+        menu(id: "dGVybToz") {
+          menuItems {
+            nodes {
+              key: id
+              title: label
+              uri
+            }
+          }
         }
       }
-      Navigation: menu(id: "dGVybToxMw==") {
-        menuItems {
-               nodes {
-                 key: id
-                 title: label
-                 uri
-               }
-             }
-       }
-      menu(id: "dGVybToz") {
-        menuItems {
-               nodes {
-                 key: id
-                 title: label
-                 uri
-               }
-             }
-       }
-    }
     `,
     variables: { slug },
   });

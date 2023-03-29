@@ -7,6 +7,7 @@ import styles from "./VerticalCard.module.scss";
 export default function VerticalCard({post,catSlug}) {
 
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
+  const base64URL = post.featuredImage?.node?.dataUrl;
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
   const authorSlug =( "/author/" + post.author?.node?.slug )|| "";
@@ -29,6 +30,8 @@ export default function VerticalCard({post,catSlug}) {
             width={400}
             height={300}
             alt={postTitle}
+            placeholder="blur"
+            blurDataURL={`"${base64URL}"`}
           />
           </Link>
         </div>

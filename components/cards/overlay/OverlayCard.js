@@ -7,6 +7,7 @@ import styles from "./OverlayCard.module.scss";
 
 export default function OverlayCard({ posts }) {
   const featuredImage = posts[0].featuredImage.node.sourceUrl;
+  const base64URL = posts[0].featuredImage.node.dataUrl;
   const postTitle = posts[0].title;
   const authorName = posts[0].author.node.name;
   const authorSlug = "/author/" + posts[0].author.node.slug;
@@ -22,6 +23,8 @@ export default function OverlayCard({ posts }) {
             width="800"
             height="500"
             alt="featured image"
+            placeholder="blur"
+            blurDataURL={`"${base64URL}"`}
           />
 
           <div className={styles.overlayGradient}></div>

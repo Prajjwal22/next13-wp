@@ -6,6 +6,8 @@ import styles from "./HorizontalCard.module.scss";
 
 export default function HorizontalCard({ post }) {
   const featuredImage = post.featuredImage.node.sourceUrl;
+  const base64URL = post.featuredImage.node.dataUrl;
+
   const postTitle = post.title;
   const authorName = post.author.node.name;
   const avatar = post.author.node.avatar.url;
@@ -19,7 +21,8 @@ export default function HorizontalCard({ post }) {
     <div className={styles.card}>
       <div className={styles.cardWrapper}>
         <div className={styles.cardImage}>
-        <Link href={slug}><Image placeholder="blur" blurDataURL={featuredImage} src={featuredImage} width={400} height={300} alt={postTitle} /></Link>
+        <Link href={slug}><Image  placeholder="blur"
+            blurDataURL={`"${base64URL}"`} src={featuredImage} width={400} height={300} alt={postTitle} /></Link>
         </div>
         <div className={styles.cardContent}>
         <Link href={"/category/" + post.categories.nodes[0].slug}> <span className={styles.cardCategory}>{category}</span></Link>

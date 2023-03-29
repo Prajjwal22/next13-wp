@@ -14,6 +14,7 @@ import Link from "next/link";
 
 export default function SinglePost({ children, post }) {
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
+  const base64URL = post.featuredImage?.node?.dataUrl;
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
   const avatar = post.author?.node?.avatar?.url || "/profile.png";
@@ -123,6 +124,8 @@ export default function SinglePost({ children, post }) {
               width={800}
               height={700}
               priority
+              placeholder="blur"
+              blurDataURL={`"${base64URL}"`}
             />
           </div>
           <div className={styles.mainContent}>{children}</div>
