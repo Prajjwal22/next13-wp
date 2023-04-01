@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaClock, FaTimes, FaTimesCircle, FaUser } from "react-icons/fa";
+import { FaClock, FaUser } from "react-icons/fa";
 import { formatDate } from "../../../lib/dateFormatter";
 import styles from "./OverlayCard.module.scss";
 
@@ -12,6 +12,7 @@ export default function OverlayCard({ posts }) {
   const authorSlug = "/author/" + posts[0].author.node.slug;
   const pubDate = posts[0].modified;
   const slug = posts[0].slug;
+  
 
   return (
     <div className={styles.overlayCard}>
@@ -21,6 +22,7 @@ export default function OverlayCard({ posts }) {
             src={featuredImage}
             width="800"
             height="500"
+            priority
             alt="featured image"
           />
 

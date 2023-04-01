@@ -5,12 +5,11 @@ import Header from "../components/header/Header";
 import ListPosts from "../components/listposts/ListPosts";
 import FeatGrid from "../components/sections/featGrid/FeatGrid";
 import LoadMore from "../components/sections/threecolgrid/LoadMore";
-import ThreeColGrid from "../components/sections/threecolgrid/ThreeColGrid";
-import InfiniteScrollList from "../components/sections/threecolgrid/ThreeColGridV2";
-import LoadMoreList from "../components/sections/threecolgrid/ThreeColGridV2";
 import { client } from "../lib/apollo";
 
 export default function Home({ posts, menu, footerMenu }) {
+
+
 
   return (
     <>
@@ -41,6 +40,7 @@ export async function getStaticProps() {
             featuredImage {
               node {
                 sourceUrl(size: LARGE)
+                dataUrl
               }
             }
             excerpt

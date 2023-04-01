@@ -19,7 +19,7 @@ export default function HorizontalCard({ post }) {
     <div className={styles.card}>
       <div className={styles.cardWrapper}>
         <div className={styles.cardImage}>
-        <Link href={slug}><Image placeholder="blur" blurDataURL={featuredImage} src={featuredImage} width={400} height={300} alt={postTitle} /></Link>
+        <Link href={slug}><Image src={featuredImage} width={400} height={300} alt={postTitle} /></Link>
         </div>
         <div className={styles.cardContent}>
         <Link href={"/category/" + post.categories.nodes[0].slug}> <span className={styles.cardCategory}>{category}</span></Link>

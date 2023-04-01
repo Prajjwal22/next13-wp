@@ -25,6 +25,7 @@ export default function Single({ post, menu, footerMenu }) {
         {SEO}
         <link rel="icon" href="/favicon.ico" />
         <title>{post.title + " - HowToShout"}</title>
+        <meta name="robots" content="index, follow" />
       </Head>
       <Header menu={menu} />
       <SinglePost post={post}>
