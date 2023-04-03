@@ -1,12 +1,15 @@
 @import '../../styles/_media.scss';
 
 .header {
-    background: #fff;
+
+    background: #ffffff73;
     height: 80px;
     width: 100%;
     position: sticky;
     top: 0;
     z-index: 1;
+    backdrop-filter: blur(20px);
+
 
     .headerWrapper {
         max-width: 1100px;
