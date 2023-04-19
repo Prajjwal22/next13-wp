@@ -37,12 +37,13 @@ export async function getServerSideProps({ res }) {
   let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
-  // Add blog post URLs to sitemap
-  posts.forEach((post) => {
+ // Add blog post URLs to sitemap
+ posts.forEach((post) => {
+    const lastModDate = new Date(post.modified).toISOString().split("T")[0];
     sitemapXml += `
       <url>
         <loc>https://howtoshout.com/${post.slug}</loc>
-        <lastmod>${post.modified}</lastmod>
+        <lastmod>${lastModDate}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
       </url>`;
