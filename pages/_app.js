@@ -39,6 +39,7 @@ const gtWalsheim = localFont({
       style: "normal",
     },
   ],
+  display: 'swap' 
 });
 
 //Route Events.
