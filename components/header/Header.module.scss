@@ -25,6 +25,8 @@
 
             @include for-phone-only {
                 margin-left: 10px;
+            max-width: 270px;
+
             }
 
             img {
@@ -51,6 +53,11 @@
                     margin-left: 2rem;
                 }
             }
+        }
+
+        .search {
+            margin-left: auto;
+            margin-right: 10px;
         }
 
         .socials {
