@@ -32,7 +32,7 @@ export default function Header({menu}) {
       {isSearch && <Search isSearch={isSearch} setIsSearch={setIsSearch}/>}
       <div className={styles.headerWrapper}>
         <div className={styles.brand}>
-          <Link href="/"><Image src="https://api.howtoshout.com/wp-content/uploads/2017/09/Howtoshout-logo-e1504411427566.png.webp" alt="brand name" width={230} height={50} /></Link>
+          <Link href="/"><Image src="https://api.howtoshout.com/wp-content/uploads/2017/09/Howtoshout-logo-e1504411427566.png.webp" alt="brand name" width={590} height={127} /></Link>
         </div>
         <div className={styles.navigation}>
           <div className={styles.navigatinMenu}>

@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import styles from "./SinglePost.module.scss";
 import { formatDate } from "../../lib/dateFormatter";
-import { usePalette } from "../../lib/usePalette";
+// import { usePalette } from "../../lib/usePalette";
 import Link from "next/link";
 
 export default function SinglePost({ children, post }) {
@@ -21,9 +21,9 @@ export default function SinglePost({ children, post }) {
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name;
 
-  const { data } = usePalette(
-    "/_next/image/?url=" + featuredImage + "&w=828&q=75"
-  );
+  // const { data } = usePalette(
+  //   "/_next/image/?url=" + featuredImage + "&w=828&q=75"
+  // );
 
   const [scroll, setScroll] = useState(0);
 
@@ -51,20 +51,20 @@ export default function SinglePost({ children, post }) {
           style={{
             transform: `scale(${scroll}, 1)`,
             opacity: `${scroll}`,
-            background: `${data.darkVibrant}`,
+            background: `#1363DF`,
           }}
         />
       </div>
       <div className={styles.singleWrapper}>
         <div
-          style={{ background: data.darkVibrant }}
+          style={{ background: '#06283D' }}
           className={styles.singleHeader}
         >
           <div className={styles.singleHeaderWrapper}>
             <div className={styles.postinfo}>
               <Link href={"/category/" + post.categories.nodes[0].slug}>
                 <span
-                  style={{ color: data.lightVibrant }}
+                  style={{ color: '#47B5FF' }}
                   className={styles.postCategory}
                 >
                   {category}
@@ -74,28 +74,28 @@ export default function SinglePost({ children, post }) {
             </div>
             <div className={styles.postMeta}>
               <div className={styles.postShare}>
-                <span style={{ background: data.muted }}>
+                <span style={{ background: "#DFF6FF" }}>
                   <Link
                     target="_blank"
                     href={`https://twitter.com/intent/tweet?text=Hey, I found something amazing on the Internet, you'd like to check this out! https://howtoshout.com/${post.slug}`}
                   >
-                    <FaTwitter color="white" size={20} />
+                    <FaTwitter color="#06283D" size={20} />
                   </Link>
                 </span>
-                <span style={{ background: data.muted }}>
+                <span style={{ background: "#DFF6FF" }}>
                   <Link
                     target="_blank"
                     href={`https://www.facebook.com/sharer/sharer.php?u=https://howtoshout.com/${post.slug}`}
                   >
-                    <FaFacebookF color="white" size={20} />
+                    <FaFacebookF color="#06283D" size={20} />
                   </Link>
                 </span>
-                <span style={{ background: data.muted }}>
+                <span style={{ background: "#DFF6FF" }}>
                   <Link
                     target="_blank"
                     href={`mailto:?body=Hey, I found something amazing on the Internet, you'd like to check this out! https://howtoshout.com/${post.slug}`}
                   >
-                    <FaEnvelope color="white" size={20} />
+                    <FaEnvelope color="#06283D" size={20} />
                   </Link>
                 </span>
               </div>
@@ -116,12 +116,13 @@ export default function SinglePost({ children, post }) {
           </div>
         </div>
         <div className={styles.singleContent}>
+          {console.log(`${featuredImage}.webp`)}
           <div className={styles.featImage}>
             <Image
-              src={featuredImage}
+              src={`${featuredImage}.webp` ||"/featured.png" }
               alt={postTitle}
-              width={800}
-              height={700}
+              width={700}
+              height={300}
               priority
             />
           </div>

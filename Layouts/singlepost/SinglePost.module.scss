@@ -175,7 +175,7 @@
                     margin: 0;
 
                     @include for-phone-only {
-                        max-height: 250px;
+                        height: 250px;
                     }
                 }
             }
