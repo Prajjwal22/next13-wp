@@ -113,7 +113,8 @@ export async function getStaticProps({ params }) {
         }
         featuredImage {
           node {
-            sourceUrl(size: CSCO_LARGE)
+            sourceUrl
+            srcSet
           }
         }
         modified

@@ -13,6 +13,7 @@ import { formatDate } from "../../lib/dateFormatter";
 import Link from "next/link";
 
 export default function SinglePost({ children, post }) {
+  const srcSet = post.featuredImage?.node?.srcSet || "/featured.png";
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
@@ -116,14 +117,15 @@ export default function SinglePost({ children, post }) {
           </div>
         </div>
         <div className={styles.singleContent}>
-          {console.log(`${featuredImage}.webp`)}
           <div className={styles.featImage}>
             <Image
-              src={`${featuredImage}.webp` ||"/featured.png" }
+              src={`${featuredImage}.webp`}
+              srcSet={srcSet}
               alt={postTitle}
-              width={700}
-              height={300}
+              width={600}
+              height={450}
               priority
+              layout="responsive"
             />
           </div>
           <div className={styles.mainContent}>{children}</div>
