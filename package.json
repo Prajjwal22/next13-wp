@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.7",
+    "@builder.io/partytown": "^0.8.0",
     "@next/bundle-analyzer": "^13.2.4",
     "@next/font": "^13.1.6",
     "cross-env": "^7.0.3",
