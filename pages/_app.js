@@ -52,7 +52,6 @@ Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <Head>
       <Script
    strategy="worker"
    src={`https://www.googletagmanager.com/gtag/js?id=G-LFFTL0Y202`}
@@ -66,7 +65,6 @@ function MyApp({ Component, pageProps }) {
         gtag('config', 'G-LFFTL0Y202');
         `,
     }}/>
-      </Head>
       <main className={gtWalsheim.className}>
         <Component {...pageProps} />
       </main>
