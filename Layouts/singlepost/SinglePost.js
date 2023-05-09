@@ -1,10 +1,8 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaEnvelope,
   FaFacebookF,
-  FaLinkedinIn,
-  FaPinterest,
   FaTwitter,
 } from "react-icons/fa";
 import styles from "./SinglePost.module.scss";

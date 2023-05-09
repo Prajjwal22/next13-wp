@@ -1,8 +1,7 @@
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { getStaticProps } from "../../pages";
 import styles from "./Search.module.scss";
 
 export default function Search({ setIsSearch }) {

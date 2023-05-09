@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import React from "react";
+
 import Head from "next/head";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";

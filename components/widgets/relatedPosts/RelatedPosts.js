@@ -1,4 +1,4 @@
-import React from "react";
+
 import VerticalCard from "../../cards/vertical/VerticalCard";
 import styles from "./RelatedPosts.module.scss";
 

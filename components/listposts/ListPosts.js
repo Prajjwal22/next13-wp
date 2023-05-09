@@ -1,4 +1,4 @@
-import React from "react";
+
 import HorizontalCard from "../cards/horizontal/HorizontalCard";
 import styles from "./ListPosts.module.scss";
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+
 import { FaClock, FaUser } from "react-icons/fa";
 import { formatDate } from "../../../lib/dateFormatter";
 import styles from "./OverlayCard.module.scss";

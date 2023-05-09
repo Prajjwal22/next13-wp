@@ -1,4 +1,4 @@
-import React from "react";
+
 import Card from "../../header/cards/Card";
 import styles from "./RelatedPosts.module.scss";
 

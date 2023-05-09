@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function Button({onClick, label, type, center, icon}) {
 
