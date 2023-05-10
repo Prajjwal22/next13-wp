@@ -51,16 +51,24 @@ Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-    <script
-    type="text/partytown" dangerouslySetInnerHTML={{
+      <Script
+   strategy="worker"
+   src="https://www.googletagmanager.com/gtag/js?id=G-LFFTL0Y202"
+/>
+<script
+    type="text/partytown"
+    dangerouslySetInnerHTML={{
         __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments)}
-        gtag('js', new Date());
-      
-        gtag('config', 'G-LFFTL0Y202');
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-LFFTL0Y202', { 
+                page_path: window.location.pathname,
+            });
         `,
-    }}/>
+    }}
+/>
       <main className={gtWalsheim.className}>
         <Component {...pageProps} />
       </main>

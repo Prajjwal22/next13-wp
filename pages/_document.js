@@ -7,11 +7,17 @@ export default function Document() {
   return (
     <Html lang='en'>
       <Head>
-      <Partytown debug={true} forward={['dataLayer.push']} />
-      <Script type='text/partytown'
-   strategy="worker"
-   src="https://www.googletagmanager.com/gtag/js?id=G-LFFTL0Y202"
-/> 
+      <script
+    data-partytown-config
+    dangerouslySetInnerHTML={{
+      __html: `
+          partytown = {
+            lib: "/_next/static/~partytown/",
+            forward: ["gtag"]           
+          };
+        `,
+    }}
+/>
       </Head>
       <body>
         <Main />
