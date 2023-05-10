@@ -34,9 +34,9 @@ export default function VerticalCard({post,catSlug}) {
         </div>
         <div className={styles.cardContent}>
         <Link href={"/category/" + fullCatSlug}><span className={styles.cardCategory}>{category}</span></Link>
-          <Link href={"/" + slug}><span className={styles.cardTitle}>
+          <h4><Link href={"/" + slug}><span className={styles.cardTitle}>
             {postTitle}
-          </span></Link>
+          </span></Link></h4>
           <span className={styles.cardExcerpt} dangerouslySetInnerHTML={{__html: excerpt}}>
           </span>
           <div className={styles.cardMeta}>

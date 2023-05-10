@@ -8,8 +8,8 @@ import styles from "./OverlayCard.module.scss";
 export default function OverlayCard({ posts }) {
   const featuredImage = posts[0].featuredImage.node.sourceUrl;
   const postTitle = posts[0].title;
-  const authorName = posts[0].author.node.name;
-  const authorSlug = "/author/" + posts[0].author.node.slug;
+  const authorName = posts[0]?.author?.node?.name || "Sophia James";
+  const authorSlug = "/author/" + posts[0]?.author?.node?.slug;
   const pubDate = posts[0].modified;
   const slug = posts[0].slug;
   
