@@ -5,7 +5,6 @@ import { client } from "../lib/apollo";
 import NProgress from "nprogress";
 import Router from "next/router";
 import "nprogress/nprogress.css";
-import Head from "next/head";
 import Script from "next/script";
 
 const gtWalsheim = localFont({
@@ -52,10 +51,7 @@ Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <Script
-   strategy="worker"
-   src={`https://www.googletagmanager.com/gtag/js?id=G-LFFTL0Y202`}
-/> <script
+    <script
     type="text/partytown" dangerouslySetInnerHTML={{
         __html: `
         window.dataLayer = window.dataLayer || [];
