@@ -5,6 +5,7 @@ import {
   FaFacebookF,
   FaTwitter,
 } from "react-icons/fa";
+import {FiTwitter, FiFacebook,FiLink} from "react-icons/fi";
 import styles from "./SinglePost.module.scss";
 import { formatDate } from "../../lib/dateFormatter";
 // import { usePalette } from "../../lib/usePalette";
@@ -56,7 +57,7 @@ export default function SinglePost({ children, post }) {
       </div>
       <div className={styles.singleWrapper}>
         <div
-          style={{ background: '#06283D' }}
+          style={{ background: '#092856' }}
           className={styles.singleHeader}
         >
           <div className={styles.singleHeaderWrapper}>
@@ -73,29 +74,24 @@ export default function SinglePost({ children, post }) {
             </div>
             <div className={styles.postMeta}>
               <div className={styles.postShare}>
-                <span style={{ background: "#DFF6FF" }}>
+                <span style={{ background: "#4F4F83" }}>
                   <Link
                     target="_blank"
                     href={`https://twitter.com/intent/tweet?text=Hey, I found something amazing on the Internet, you'd like to check this out! https://howtoshout.com/${post.slug}`}
                   >
-                    <FaTwitter color="#06283D" size={20} />
+                    <FiTwitter color="#fff" size={20} />
                   </Link>
                 </span>
-                <span style={{ background: "#DFF6FF" }}>
+                <span style={{ background: "#4F4F83" }}>
                   <Link
                     target="_blank"
                     href={`https://www.facebook.com/sharer/sharer.php?u=https://howtoshout.com/${post.slug}`}
                   >
-                    <FaFacebookF color="#06283D" size={20} />
+                    <FiFacebook color="#fff" size={20} />
                   </Link>
                 </span>
-                <span style={{ background: "#DFF6FF" }}>
-                  <Link
-                    target="_blank"
-                    href={`mailto:?body=Hey, I found something amazing on the Internet, you'd like to check this out! https://howtoshout.com/${post.slug}`}
-                  >
-                    <FaEnvelope color="#06283D" size={20} />
-                  </Link>
+                <span style={{ background: "#4F4F83" }} onClick={()=>navigator?.clipboard.writeText(`https://howtoshout.com/${post.slug}`)}>
+                    <FiLink color="#fff" size={20} />
                 </span>
               </div>
               <div className={styles.authorDate}>
@@ -123,7 +119,6 @@ export default function SinglePost({ children, post }) {
               width={600}
               height={450}
               priority
-              layout="responsive"
             />
           </div>
           <div className={styles.mainContent}>{children}</div>

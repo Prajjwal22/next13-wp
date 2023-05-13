@@ -7,6 +7,8 @@ export default function Document() {
   return (
     <Html lang='en'>
       <Head>
+      <Script strategy="afterInteractive" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5253670042601731"
+     crossOrigin="anonymous"/>
       <script
     data-partytown-config
     dangerouslySetInnerHTML={{
