@@ -1,10 +1,5 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import {
-  FaEnvelope,
-  FaFacebookF,
-  FaTwitter,
-} from "react-icons/fa";
 import {FiTwitter, FiFacebook,FiLink} from "react-icons/fi";
 import styles from "./SinglePost.module.scss";
 import { formatDate } from "../../lib/dateFormatter";
