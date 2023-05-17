@@ -6,8 +6,7 @@ export default function Document() {
   return (
     <Html lang='en'>
       <Head>
-      <script text="text/partytown" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5253670042601731"
-     crossOrigin="anonymous"></script>
+      <Script strategy="worker" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5253670042601731"/>
       <script
     data-partytown-config
     dangerouslySetInnerHTML={{
