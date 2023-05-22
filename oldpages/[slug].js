@@ -3,7 +3,7 @@ import Head from "next/head";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import RelatedPosts from "../components/widgets/relatedPosts/RelatedPosts";
-import SinglePost from "../Layouts/singlepost/SinglePost";
+import SinglePost from "../app/[slug]/layout";
 import { client } from "../lib/apollo";
 import parse  from "html-react-parser"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
@@ -12,7 +14,28 @@ import {
 import Link from "next/link";
 import Search from "../search/Search";
 
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { gql } from "@apollo/client/core";
+
+
+const query = gql` query PostLists {
+  Navigation: menu(id: "dGVybToxMw==") {
+    menuItems {
+           nodes {
+             key: id
+             title: label
+             uri
+           }
+         }
+   }
+}`
+
 export default function Header({menu}) {
+  const { data } = useSuspenseQuery(query);
+
+const Navigation = data.Navigation.menuItems.nodes
+
+console.log(Navigation)
 
   const [open, setOpen] = useState(false);
   
@@ -36,7 +59,7 @@ export default function Header({menu}) {
         </div>
         <div className={styles.navigation}>
           <div className={styles.navigatinMenu}>
-            {menu.slice(1,6).map((item, i) => {
+            {Navigation.slice(1,6).map((item, i) => {
               return <Link key={i} href={item.uri}><span className={styles.navLink}>{item.title}</span></Link>
             })}
           </div>
@@ -80,7 +103,7 @@ export default function Header({menu}) {
           {open && (
             <div className={styles.mobileNav}>
               <div className={styles.mobileMenu}>
-              {menu.slice(1,6).map((item, i) => {
+              {Navigation.slice(1,6).map((item, i) => {
               return <Link key={i} href={item.uri}><span className={styles.navLink}>{item.title}</span></Link>
             })}
               </div>

@@ -1,9 +1,32 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./Footer.module.scss";
 
+
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { gql } from "@apollo/client/core";
+
+const query = gql` query PostLists {
+  Navigation: menu(id: "dGVybToz") {
+    menuItems {
+           nodes {
+             key: id
+             title: label
+             uri
+           }
+         }
+   }
+}`
+
 export default function Footer({footerMenu}) {
+
+  const { data } = useSuspenseQuery(query);
+
+  const Navigation = data.Navigation.menuItems.nodes
+
   return (
     <div className={styles.footer}>
       <div className={styles.footerWrapper}>
@@ -23,7 +46,7 @@ export default function Footer({footerMenu}) {
             <Image src="https://api.howtoshout.com/wp-content/uploads/2017/09/Howtoshout-logo-e1504411427566.png.webp" alt="footer logo" width={250} height={70} />
           </div>
           <div className={styles.footerNav}>
-            {footerMenu.map((navLink) => {
+            {Navigation.map((navLink) => {
               return  <span key={navLink.key} className={styles.navLink}><Link href={navLink.uri}>{navLink.title}</Link></span>
             })}
           </div>

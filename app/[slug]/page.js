@@ -1,12 +1,86 @@
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import {FiTwitter, FiFacebook,FiLink} from "react-icons/fi";
+"use client";
+import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { gql } from "@apollo/client/core";
 import styles from "./SinglePost.module.scss";
-import { formatDate } from "../../lib/dateFormatter";
-// import { usePalette } from "../../lib/usePalette";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { formatDate } from "../../lib/dateFormatter";
+import {FiTwitter, FiFacebook,FiLink} from "react-icons/fi";
+import Image from "next/image";
 
-export default function SinglePost({ children, post }) {
+export default function Single({ params }) {
+  const { slug } = params;
+  const query = gql`
+    query SinglePostBySlug($slug: String!) {
+      postBy(slug: $slug) {
+        author {
+          node {
+            avatar {
+              url
+            }
+            name
+            slug
+          }
+        }
+        postId
+        categories {
+          nodes {
+            name
+            slug
+            posts(first: 4) {
+              nodes {
+                title
+                slug
+                modified
+                categories {
+                  nodes {
+                    name
+                    slug
+                  }
+                }
+                excerpt
+                author {
+                  node {
+                    avatar {
+                      url
+                    }
+                    name
+                    slug
+                  }
+                }
+                featuredImage {
+                  node {
+                    sourceUrl(size: LARGE)
+                  }
+                }
+              }
+            }
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+            srcSet
+          }
+        }
+        modified
+        slug
+        title
+        content
+        seo {
+          fullHead
+        }
+      }
+    }
+  `;
+
+  const { data } = useSuspenseQuery(query, {
+    variables: {
+      slug,
+    },
+  });
+
+  const post = data.postBy
   const srcSet = post.featuredImage?.node?.srcSet || "/featured.png";
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
@@ -15,10 +89,8 @@ export default function SinglePost({ children, post }) {
   const authorSlug = "/author/" + post.author?.node?.slug;
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name;
-
-  // const { data } = usePalette(
-  //   "/_next/image/?url=" + featuredImage + "&w=828&q=75"
-  // );
+  const postContent = post.content
+  console.log("Fdsfdsf", data.postBy)
 
   const [scroll, setScroll] = useState(0);
 
@@ -38,8 +110,9 @@ export default function SinglePost({ children, post }) {
     return () => window.removeEventListener("scroll", progressBarHandler);
   });
 
+
   return (
-    <article className={styles.single}>
+      <article className={styles.single}>
       <div id="progressBarContainer">
         <div
           id="progressBar"
@@ -116,7 +189,7 @@ export default function SinglePost({ children, post }) {
               priority
             />
           </div>
-          <div className={styles.mainContent}>{children}</div>
+          <div className={styles.mainContent} dangerouslySetInnerHTML={{__html:postContent }}></div>
         </div>
       </div>
     </article>
