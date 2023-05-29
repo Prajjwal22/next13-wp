@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import {FiTwitter, FiFacebook,FiLink} from "react-icons/fi";
 import styles from "./SinglePost.module.scss";
 import { formatDate } from "../../lib/dateFormatter";
+import {DiscussionEmbed} from "disqus-react"
 // import { usePalette } from "../../lib/usePalette";
 import Link from "next/link";
+
+
 
 export default function SinglePost({ children, post }) {
   const srcSet = post.featuredImage?.node?.srcSet || "/featured.png";
@@ -15,6 +18,15 @@ export default function SinglePost({ children, post }) {
   const authorSlug = "/author/" + post.author?.node?.slug;
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name;
+
+
+    const disqusShortname = "howtoshout-1"
+    const disqusConfig = {
+      url: `https://howtoshout.com/${post.slug}`,
+      identifier: post.postId,
+      title: post.title
+    }
+  
 
   // const { data } = usePalette(
   //   "/_next/image/?url=" + featuredImage + "&w=828&q=75"
@@ -117,8 +129,13 @@ export default function SinglePost({ children, post }) {
             />
           </div>
           <div className={styles.mainContent}>{children}</div>
+          <DiscussionEmbed
+        shortname={disqusShortname}
+        config={disqusConfig}
+      />
         </div>
       </div>
+     
     </article>
   );
 }
