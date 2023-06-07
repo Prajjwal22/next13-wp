@@ -6,6 +6,7 @@ import { formatDate } from "../../lib/dateFormatter";
 import {DiscussionEmbed} from "disqus-react"
 // import { usePalette } from "../../lib/usePalette";
 import Link from "next/link";
+import LazyDisqusComponent from "../../components/disqus/Disqus";
 
 
 
@@ -129,10 +130,11 @@ export default function SinglePost({ children, post }) {
             />
           </div>
           <div className={styles.mainContent}>{children}</div>
-          <DiscussionEmbed
+          {/* <DiscussionEmbed
         shortname={disqusShortname}
         config={disqusConfig}
-      />
+      /> */}
+      <LazyDisqusComponent post={post}/>
         </div>
       </div>
      
