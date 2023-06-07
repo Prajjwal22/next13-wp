@@ -8,8 +8,8 @@ export default function ListCard({ post }) {
   
   const featuredImage = post.featuredImage.node.sourceUrl;
   const postTitle = post.title;
-  const authorName = post.author.node.name;
-  const authorSlug =  "/author/" + post.author.node.slug;
+  const authorName = post.author?.node.name || "Shophia";
+  const authorSlug =  "/author/" + (post.author?.node.slug || "#");
   const pubDate = post.modified;
   const category = post.categories.nodes[0].name;
   const slug = post.slug;

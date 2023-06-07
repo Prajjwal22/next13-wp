@@ -6,7 +6,7 @@ export default function Document() {
   return (
     <Html lang='en'>
       <Head>
-      <Script strategy="afterInteractive" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5253670042601731"/>
+      {/* <Script strategy="afterInteractive" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5253670042601731"/>
       <script
     data-partytown-config
     dangerouslySetInnerHTML={{
@@ -17,7 +17,7 @@ export default function Document() {
           };
         `,
     }}
-/>
+/> */}
       </Head>
       <body>
         <Main />

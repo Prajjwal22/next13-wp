@@ -23,6 +23,8 @@ export default function Single({ post, menu, footerMenu }) {
     <div>
       <Head>
         {SEO}
+        <meta property="og:image" content={post.featuredImage.node.sourceUrl} />
+        <link rel="canonical" href={"https://howtoshout.com/" + post.slug+ "/"}/>
         <link rel="icon" href="/favicon.ico" />
         <title>{post.title + " - HowToShout"}</title>
         <meta name="robots" content="index, follow" />

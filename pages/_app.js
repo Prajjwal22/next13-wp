@@ -55,6 +55,10 @@ function MyApp({ Component, pageProps }) {
    strategy="worker"
    src="https://www.googletagmanager.com/gtag/js?id=G-LFFTL0Y202"
 />
+<Script
+   strategy="worker"
+   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5253670042601731"
+/>
 <script
     type="text/partytown"
     dangerouslySetInnerHTML={{
