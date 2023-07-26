@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
    strategy="worker"
    src="https://www.googletagmanager.com/gtag/js?id=G-LFFTL0Y202"
 />
-<Script async
+<script async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
         data-ad-client="ca-pub-5253670042601731"
       />
