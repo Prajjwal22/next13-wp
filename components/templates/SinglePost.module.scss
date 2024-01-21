@@ -149,6 +149,10 @@
             font-size: 1.2rem;
             color: #0b2050;
 
+            @include for-phone-only {
+               font-size: 1rem;
+            }
+
             p {
                 margin: 1em 0;
                 font-weight: 300;

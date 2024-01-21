@@ -16,6 +16,8 @@ type props = {
 }
 
 export default function SinglePost({ post,children }:props) {
+
+    console.log(post)
   const srcSet = post.featuredImage?.node?.srcSet || "/featured.png";
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
@@ -128,7 +130,7 @@ export default function SinglePost({ post,children }:props) {
           <div className={styles.featImage}>
             <Image
               src={`${featuredImage}.webp`}
-              srcSet={srcSet}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt={postTitle}
               width={600}
               height={450}
