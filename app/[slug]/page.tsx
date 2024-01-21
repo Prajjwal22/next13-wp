@@ -3,16 +3,16 @@ import RelatedPosts from "@/components/widgets/relatedPosts/RelatedPosts";
 import { getAllParams, getPostBySlug } from "@/lib/wordpress";
 import React from "react";
 
-type props = {
+type SingleProps = {
   params: {
     slug: string;
   };
   children: React.ReactNode;
 };
-export default async function SingleArticle({
+export default async  function SinglePostPage({
   params: { slug },
   children,
-}: props) {
+}: SingleProps) {
   const post = await getPostBySlug(slug);
   const postsByCategory = post.categories.nodes[0].posts.nodes.slice(0, 4);
 

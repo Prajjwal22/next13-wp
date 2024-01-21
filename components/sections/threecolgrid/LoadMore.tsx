@@ -72,7 +72,7 @@ export default function LoadMore({ archiveName }:LoadMoreProps) {
       setLoading(false)
     }
     fetchPosts()
-  },[])
+  })
 
 
   const handleLoadMore = async()=>{

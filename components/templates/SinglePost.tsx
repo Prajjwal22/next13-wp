@@ -9,10 +9,13 @@ import Link from "next/link";
 import LazyDisqusComponent from "../../components/disqus/Disqus";
 import { formatDate } from "@/lib/utils";
 
+type props = {
+    post:Posts;
+    children?:React.ReactNode
 
+}
 
-export default function SinglePost({ children, post }) {
-    console.log(post)
+export default function SinglePost({ post,children }:props) {
   const srcSet = post.featuredImage?.node?.srcSet || "/featured.png";
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
@@ -35,7 +38,7 @@ export default function SinglePost({ children, post }) {
   //   "/_next/image/?url=" + featuredImage + "&w=828&q=75"
   // );
 
-  const [scroll, setScroll] = useState(0);
+  const [scroll, setScroll] = useState<number>(0);
 
   useEffect(() => {
     let progressBarHandler = () => {
@@ -45,7 +48,7 @@ export default function SinglePost({ children, post }) {
         document.documentElement.clientHeight;
       const scroll = `${totalScroll / windowHeight}`;
 
-      setScroll(scroll);
+      setScroll(parseInt(scroll));
     };
 
     window.addEventListener("scroll", progressBarHandler);

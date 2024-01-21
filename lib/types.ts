@@ -16,6 +16,7 @@ type Posts = {
   featuredImage: {
     node: {
       sourceUrl: string;
+      srcSet:string
     };
   };
   categories: {
@@ -32,4 +33,5 @@ type Posts = {
       description:string
     };
   };
+  content:string
 };
