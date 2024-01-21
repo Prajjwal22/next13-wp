@@ -1,9 +1,43 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.scss";
-import Header from "./components/header/Header";
+import Homepage from "@/components/templates/Homepage";
 
-const inter = Inter({ subsets: ["latin"] });
+const gtWalsheim = localFont({
+  src: [
+    {
+      path: "../public/fonts/GTWalsheimPro-Light.woff",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/GTWalsheimPro-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/GTWalsheimPro-RegularOblique.woff",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/GTWalsheimPro-Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/GTWalsheimPro-BoldOblique.woff",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/GTWalsheimPro-Black.woff",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  display: 'swap' 
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +51,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header/>
-        {children}</body>
+      <body className={gtWalsheim.className}>
+        <Homepage>
+          {children}
+        </Homepage>
+       </body>
     </html>
   );
 }

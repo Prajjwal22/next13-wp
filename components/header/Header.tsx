@@ -15,7 +15,11 @@ import { getMenu } from "@/lib/wordpress";
 import Nav from "./Nav";
 // import Search from "../search/Search";
 
-export default function Header() {
+type MenuProps = {
+  menu:MenuItems[]
+}
+
+export default function Header({menu}:MenuProps) {
   const [open, setOpen] = useState(false);
 
   const [isSearch, setIsSearch] = useState(false);
@@ -45,10 +49,9 @@ export default function Header() {
         </div>
         <div className={styles.navigation}>
           <div className={styles.navigatinMenu}>
-            <Nav/>
-            {/* {menu.slice(1,6).map((item, i) => {
-              return <Link key={i} href={item.uri}><span className={styles.navLink}>{item.title}</span></Link>
-            })} */}
+            {menu.slice(1,6).map((item, i) => {
+              return <Link key={item.id} href={item.uri}><span className={styles.navLink}>{item.label}</span></Link>
+            })}
           </div>
         </div>
         <div onClick={() => handleSearch()} className={styles.search}>

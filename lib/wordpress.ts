@@ -23,6 +23,5 @@ export async function getMenu() {
         next: { revalidate: 10 },
       })
       const data = await res.json()
-      console.log(data)
-      return data.menu
+      return data.data.menu.menuItems.nodes
     }
