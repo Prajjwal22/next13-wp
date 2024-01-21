@@ -1,0 +1,42 @@
+@import '../../../app/media';
+
+
+.featGrid {
+    background-color: black;
+    padding: 30px 10px;
+    .gridWrapper {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        max-width: 1300px;
+        margin: auto;
+
+        @include for-tablet-portrait-up  {
+            grid-template-columns: 1fr;
+      
+        }
+
+        @include  for-desktop-up  {
+            grid-template-columns: 3fr 2fr;
+            }
+
+
+        @include for-phone-only {
+        grid-template-columns: auto;
+        }
+
+        .right {
+            display: grid;
+            @include  for-tablet-portrait-up {
+                grid-template-columns: 1fr 1fr;
+                }
+
+                @include for-phone-only {
+                    grid-template-columns: 1fr;
+                }
+
+                @include for-tablet-landscape-up {
+                    grid-template-columns: 1fr;
+                }
+        }
+    }
+}

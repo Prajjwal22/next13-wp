@@ -1,0 +1,27 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width:700px;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.inputField {
+    height: 50px;
+    border-radius: 4px;
+    padding:10px;
+    border: 1px solid #a2a1a1;
+    width: 100%;
+}
+
+.inputField:focus {
+outline: none;
+}
+
+
+.form textarea {
+    resize: none;
+    height: 220px;
+}

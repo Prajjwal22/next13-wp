@@ -11,9 +11,7 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import Link from "next/link";
-import { getMenu } from "@/lib/wordpress";
-import Nav from "./Nav";
-// import Search from "../search/Search";
+import Search from '@/components/search/Search'// import Search from "../search/Search";
 
 type MenuProps = {
   menu:MenuItems[]
@@ -34,7 +32,7 @@ export default function Header({menu}:MenuProps) {
 
   return (
     <header className={styles.header}>
-      {isSearch && <Search isSearch={isSearch} setIsSearch={setIsSearch} />}
+      {isSearch && <Search setIsSearch={setIsSearch} />}
       <div className={styles.headerWrapper}>
         <div className={styles.brand}>
           <Link href="/">

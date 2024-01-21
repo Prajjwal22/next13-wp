@@ -10,6 +10,11 @@ const nextConfig = {
               hostname: 'api.howtoshout.com',
               port: '',
             },
+            {
+              protocol: 'https',
+              hostname: 'secure.gravatar.com',
+              port: '',
+            },
           ],
     }
 };

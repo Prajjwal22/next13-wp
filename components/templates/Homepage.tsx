@@ -1,17 +1,23 @@
-import React from 'react'
-import Header from '@/components/header/Header';
-import { getMenu } from '@/lib/wordpress';
+import React from "react";
+import Header from "@/components/header/Header";
+import { getMenu, getPosts } from "@/lib/wordpress";
+import FeatGrid from "@/components/sections/featGrid/FeatGrid";
+import ListPosts from "@/components/listposts/ListPosts";
+import LoadMore from "@/components/sections/threecolgrid/LoadMore";
+import Footer from "@/components/footer/Footer";
 
-export default async function Homepage({children}: Readonly<{
-    children: React.ReactNode;
-  }>) {
+export default async function Homepage({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const posts = await getPosts();
 
-
-    const menu = await getMenu()
-    console.log(menu)
   return (
-   <>
-   <Header menu={menu}/>
-   </>
-  )
+    <main>
+      <FeatGrid posts={posts} />
+      <ListPosts posts={posts} />
+      <LoadMore />
+    </main>
+  );
 }
