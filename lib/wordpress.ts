@@ -229,7 +229,7 @@ export async function getAllParams() {
     body: JSON.stringify({
       query: `
       query GetAllSlugs {
-        posts(first: 500) {
+        posts(first: 100) {
           nodes {
             slug
           }

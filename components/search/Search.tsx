@@ -10,34 +10,34 @@ type searchProps = {
 export default function Search({ setIsSearch }:searchProps) {
   const [query, setQuery] = useState("");
 
-  const SEARCH_RESULTS = gql`
-    query GetPostsBySearch($query: String!, $after: String) {
-      searchPosts: posts(first: 10, after: $after, where: { search: $query }) {
-        nodes {
-          title
-          excerpt
-          slug
-        }
-        pageInfo {
-          endCursor
-          hasNextPage
-        }
-      }
-    }
-  `;
+  // const SEARCH_RESULTS = gql`
+  //   query GetPostsBySearch($query: String!, $after: String) {
+  //     searchPosts: posts(first: 10, after: $after, where: { search: $query }) {
+  //       nodes {
+  //         title
+  //         excerpt
+  //         slug
+  //       }
+  //       pageInfo {
+  //         endCursor
+  //         hasNextPage
+  //       }
+  //     }
+  //   }
+  // `;
 
   console.log(query);
-  const [executeSearch, { data, loading }] = useLazyQuery(SEARCH_RESULTS);
+  // const [executeSearch, { data, loading }] = useLazyQuery(SEARCH_RESULTS);
 
-  const handleChange = (e) => {
-    const newQuery = e.target.value;
-    setQuery(newQuery);
-    if (newQuery !== query) {
-      executeSearch({
-        variables: { query: newQuery },
-      });
-    }
-  };
+  // const handleChange = (e) => {
+  //   const newQuery = e.target.value;
+  //   setQuery(newQuery);
+  //   if (newQuery !== query) {
+  //     executeSearch({
+  //       variables: { query: newQuery },
+  //     });
+  //   }
+  // };
 
   return (
     <div
@@ -46,7 +46,7 @@ export default function Search({ setIsSearch }:searchProps) {
       }}
       className={styles.search}
     >
-      <div className={styles.searchModal}>
+      {/* <div className={styles.searchModal}>
         <div className={styles.searchWrapper}>
           <div className={styles.searchControls}>
             <label for="docsearch-input">
@@ -92,7 +92,7 @@ export default function Search({ setIsSearch }:searchProps) {
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

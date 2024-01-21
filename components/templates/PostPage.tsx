@@ -5,12 +5,10 @@ import React from "react";
 
 type SingleProps = {
   slug:string
-  children: React.ReactNode;
 };
 
 export default async function PostPage({
   slug,
-  children,
 }: SingleProps) {
   const post = await getPostBySlug(slug);
   const postsByCategory = post.categories.nodes[0].posts.nodes.slice(0, 4);
@@ -20,7 +18,7 @@ export default async function PostPage({
   );
   return (
     <>
-      <SinglePost post={post}>{children}</SinglePost>
+      <SinglePost post={post}/>
       <RelatedPosts relatedPosts={relatedPosts} />
     </>
   );

@@ -1,11 +1,16 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import React, { ReactNode } from "react";
 import Homepage from "@/components/templates/Homepage";
+import type { Metadata } from 'next'
 
-export default function Home({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return <Homepage>{children}</Homepage>;
+type HomeProps ={
+  children?: ReactNode;
+}
+
+export default function Home() {
+  return <Homepage/>;
+}
+
+export const metadata: Metadata = {
+  title: "omePage",
+  description: '...',
 }

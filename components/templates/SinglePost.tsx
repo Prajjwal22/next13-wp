@@ -11,11 +11,10 @@ import { formatDate } from "@/lib/utils";
 
 type props = {
     post:Posts;
-    children?:React.ReactNode
 
 }
 
-export default function SinglePost({ post,children }:props) {
+export default function SinglePost({ post }:props) {
 
     console.log(post)
   const srcSet = post.featuredImage?.node?.srcSet || "/featured.png";

@@ -6,11 +6,7 @@ import ListPosts from "@/components/listposts/ListPosts";
 import LoadMore from "@/components/sections/threecolgrid/LoadMore";
 import Footer from "@/components/footer/Footer";
 
-export default async function Homepage({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function Homepage() {
   const posts = await getPosts();
 
   return (
