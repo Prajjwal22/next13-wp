@@ -15,16 +15,13 @@ type props = {
 }
 
 export default function SinglePost({ post }:props) {
-
-    console.log(post)
-  const srcSet = post.featuredImage?.node?.srcSet || "/featured.png";
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
   const avatar = post.author?.node?.avatar?.url || "/profile.png";
   const authorSlug = "/author/" + post.author?.node?.slug;
   const pubDate = post.modified;
-//   const category = post.categories.nodes[0].name;
+  const category = post.categories.nodes[0].name;
 
 
 //     const disqusShortname = "howtoshout-1"
@@ -77,14 +74,14 @@ export default function SinglePost({ post }:props) {
         >
           <div className={styles.singleHeaderWrapper}>
             <div className={styles.postinfo}>
-              {/* <Link href={"/category/" + post.categories.nodes[0].slug}>
+              <Link href={"/category/" + post.categories.nodes[0].slug}>
                 <span
                   style={{ color: '#47B5FF' }}
                   className={styles.postCategory}
                 >
                   {category}
                 </span>
-              </Link> */}
+              </Link>
               <h1 className={styles.postTitle}>{postTitle}</h1>
             </div>
             <div className={styles.postMeta}>

@@ -81,8 +81,12 @@ export async function getPosts() {
   return data.data.posts.nodes;
 }
 
-export async function getPaginatedPosts(endCursor: string) {
+export async function getPaginatedPosts(endCursor: string, catSlug:string,authorSlug:string) {
   let after = !endCursor ? "" : `\"${endCursor}\"`;
+  let category = !catSlug ? " " : `\"${catSlug}\"`;
+  let author = !authorSlug ? " " : `\"${authorSlug}\"`;
+
+  console.log(author)
 
   const res = await fetch(`https://api.howtoshout.com/graphql`, {
     method: "POST",
@@ -91,8 +95,8 @@ export async function getPaginatedPosts(endCursor: string) {
     },
     body: JSON.stringify({
       query: `
-      query GetPosts($after: String) {
-        posts(first: 9, after: $after) {
+      query GetPosts($after: String,$category: String!,$author:String!) {
+        posts(first: 9, after: $after, where: {categoryName: $category, authorName:$author}) {
           pageInfo {
             hasNextPage
             endCursor
@@ -128,6 +132,8 @@ export async function getPaginatedPosts(endCursor: string) {
       `,
       variables: {
         after: after,
+        category:category,
+        author:author
       },
     }),
     next: { revalidate: 10 },
@@ -242,4 +248,57 @@ export async function getAllParams() {
   const data = await res.json();
 
   return data.data.posts.nodes;
+}
+
+
+export async function getAllCategories() {
+  const res = await fetch(`https://api.howtoshout.com/graphql`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query CategoriesSlug {
+        categories(first: 100) {
+          nodes {
+            slug
+            databaseId
+            name
+          }
+        }
+      }
+      `,
+    }),
+    next: { revalidate: 3600 },
+  });
+  const data = await res.json();
+  console.log(data)
+
+  return data.data.categories.nodes;
+}
+
+
+export async function getAllAuthors() {
+  const res = await fetch(`https://api.howtoshout.com/graphql`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query AuthorSlug {
+        users {
+          nodes {
+            slug
+            name
+          }
+        }
+      }
+      `,
+    }),
+    next: { revalidate: 3600 },
+  });
+  const data = await res.json();
+  return data.data.users.nodes;
 }

@@ -10,62 +10,25 @@ import { FiCommand } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { getPaginatedPosts, getPosts } from "@/lib/wordpress";
 
-type LoadMoreProps = {
-  archiveName?:string
-}
 
-
-
-const GET_POSTS = `
-  query GetPosts($first: Int!, $after: String) {
-    posts(first: $first, after: $after) {
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      nodes {
-        title
-        slug
-        modified
-        featuredImage {
-          node {
-            sourceUrl(size: LARGE)
-          }
-        }
-        excerpt
-        categories {
-          nodes {
-            name
-            slug
-          }
-        }
-        author {
-          node {
-            avatar {
-              url
-            }
-            name
-            slug
-          }
-        }
-      }
-    }
-  }
-`;
-
-
-export default function LoadMore({ archiveName }:LoadMoreProps) {
+export default function LoadMore() {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<Posts[]>([])
   const [batchInfo,setBatchInfo] = useState({hasNextPage:true,endCursor:""})
 
   const pathName = usePathname();
 
+  const catSlug = pathName.split("/")
+  const postCategory = catSlug[catSlug.length-1]
+
+  let author ="lucid-dijkstra"
+
+
   useEffect(()=>{
 
     const fetchPosts = async()=>{
       setLoading(true)
-      const data = await getPaginatedPosts(batchInfo.endCursor)
+      const data = await getPaginatedPosts(batchInfo.endCursor,postCategory,author)
       const {pageInfo, nodes} = data
       setPosts(nodes)
       setBatchInfo(pageInfo)
@@ -77,7 +40,7 @@ export default function LoadMore({ archiveName }:LoadMoreProps) {
 
   const handleLoadMore = async()=>{
     setLoading(true)
-    const morePosts = await getPaginatedPosts(batchInfo.endCursor)
+    const morePosts = await getPaginatedPosts(batchInfo.endCursor,postCategory,author)
     const {pageInfo, nodes} = morePosts
     setPosts(prevPosts => [...prevPosts, ...nodes])
     setBatchInfo(pageInfo)
@@ -95,7 +58,7 @@ export default function LoadMore({ archiveName }:LoadMoreProps) {
         <h3 className="container">
           {pathName === "/"
             ? "What's New?"
-            : "Latest Posts From " + archiveName}
+            : "Latest Posts From " + postCategory}
         </h3>
       </div>
       {pathName === "/" || pathName.includes("category") ? (
@@ -104,13 +67,13 @@ export default function LoadMore({ archiveName }:LoadMoreProps) {
         <div className={styles.authorBox}>
           <div className={styles.authorWrapper}>
             <Image
-              src={posts[0].author.node.avatar.url}
+              src={posts[0]?.author.node.avatar.url}
               width={100}
               height={100}
-              alt={posts[0].author.node.name}
+              alt={posts[0]?.author.node.name}
             />
             <div className={styles.authorInfo}>
-              <p>{posts[0].author.node.description}</p>
+              <p>{posts[0]?.author.node.description}</p>
               <span className={styles.authorSocial}>
                 <span>
                   <FaFacebook size={20} />
@@ -134,7 +97,7 @@ export default function LoadMore({ archiveName }:LoadMoreProps) {
           : posts.map((post, i) => {
               return (
                 <>
-                  <VerticalCard key={i} catSlug={"catSlug"} post={post} />
+                  <VerticalCard key={i}  post={post} />
                 </>
               );
             })}
