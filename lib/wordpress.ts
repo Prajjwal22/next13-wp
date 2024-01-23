@@ -26,7 +26,6 @@ export async function getMenu(id: string) {
     next: { revalidate: 10 },
   });
   const data = await res.json();
-  console.log(data);
   return data.data.menu.menuItems.nodes;
 }
 
@@ -86,7 +85,6 @@ export async function getPaginatedPosts(endCursor: string, catSlug:string,author
   let category = !catSlug ? " " : `\"${catSlug}\"`;
   let author = !authorSlug ? " " : `\"${authorSlug}\"`;
 
-  console.log(author)
 
   const res = await fetch(`https://api.howtoshout.com/graphql`, {
     method: "POST",
@@ -273,7 +271,6 @@ export async function getAllCategories() {
     next: { revalidate: 3600 },
   });
   const data = await res.json();
-  console.log(data)
 
   return data.data.categories.nodes;
 }

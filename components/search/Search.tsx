@@ -26,7 +26,7 @@ export default function Search({ setIsSearch }:searchProps) {
   //   }
   // `;
 
-  console.log(query);
+
   // const [executeSearch, { data, loading }] = useLazyQuery(SEARCH_RESULTS);
 
   // const handleChange = (e) => {

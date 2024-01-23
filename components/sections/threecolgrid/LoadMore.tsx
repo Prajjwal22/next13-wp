@@ -47,8 +47,7 @@ export default function LoadMore() {
     setLoading(false)
   }
 
-  console.log(batchInfo)
-  console.log(posts)
+
 
 
   return (
