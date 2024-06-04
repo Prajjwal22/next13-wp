@@ -302,7 +302,6 @@ export async function getAllPages() {
   return data.data.pages.nodes;
 }
 
-
 export async function getPageBySlug(postSlug: string) {
   let slug = !postSlug ? "" : `\"${postSlug}\"`;
 
@@ -345,7 +344,8 @@ export async function getPageBySlug(postSlug: string) {
   return data.data.pageBy;
 }
 
-export async function getAllAuthors() {
+export async function getAllAuthors(authorSlug: string) {
+  let slug = !authorSlug ? "" : `\"${authorSlug}\"`;
   const res = await fetch(`https://api.howtoshout.com/graphql`, {
     method: "POST",
     headers: {
@@ -353,18 +353,28 @@ export async function getAllAuthors() {
     },
     body: JSON.stringify({
       query: `
-      query AuthorSlug {
-        users {
-          nodes {
-            slug
-            name
+      query GetAuthor($slug: ID!) {
+        user(id:  $slug, idType: SLUG) {
+          username
+          posts {
+            nodes {
+              title
+              slug
+            }
           }
+          description
+          avatar {
+            url
+          }
+          slug
         }
       }
-      `,
+      `, variables: {
+        slug: authorSlug,
+      },
     }),
     next: { revalidate: 3600 },
   });
   const data = await res.json();
-  return data.data.users.nodes;
+  return data.data.user;
 }
