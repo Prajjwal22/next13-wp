@@ -1,16 +1,23 @@
-import { getAllPages } from '@/lib/wordpress';
-import { Metadata } from 'next';
-import React from 'react'
+import { getAllPages, getPageBySlug } from "@/lib/wordpress";
+import { Metadata } from "next";
+import React from "react";
 
-export default function page({ params }: { params: { slug: string } }) {
-
-
-    console.log("first")
+export default async function page({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) {
+  let pageData = await getPageBySlug(slug);
   return (
-    <div>page</div>
-  )
+    <div className="co">
+      <h1>{pageData.title}</h1>
+      <div
+        className="mainContent"
+        dangerouslySetInnerHTML={{ __html: pageData.content }}
+      ></div>
+    </div>
+  );
 }
-
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
@@ -21,8 +28,7 @@ export async function generateStaticParams() {
   }));
 }
 
-
 export const metadata: Metadata = {
   title: "PostPage",
-  description: '...',
-}
+  description: "...",
+};

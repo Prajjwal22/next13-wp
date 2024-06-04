@@ -302,6 +302,49 @@ export async function getAllPages() {
   return data.data.pages.nodes;
 }
 
+
+export async function getPageBySlug(postSlug: string) {
+  let slug = !postSlug ? "" : `\"${postSlug}\"`;
+
+  const res = await fetch(`https://api.howtoshout.com/graphql`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query GetPages($slug: String) {
+        pageBy(uri: $slug) {
+          author {
+            node {
+              avatar {
+                url
+              }
+              name
+              slug
+            }
+          }
+          modified
+          slug
+          title
+          content
+          seo {
+            fullHead
+          }
+        }
+      }
+      `,
+      variables: {
+        slug: postSlug,
+      },
+    }),
+    next: { revalidate: 10 },
+  });
+
+  const data = await res.json();
+  return data.data.pageBy;
+}
+
 export async function getAllAuthors() {
   const res = await fetch(`https://api.howtoshout.com/graphql`, {
     method: "POST",
