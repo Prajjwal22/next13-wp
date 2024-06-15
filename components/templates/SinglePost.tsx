@@ -139,7 +139,7 @@ export default function SinglePost({ post }:props) {
         shortname={disqusShortname}
         config={disqusConfig}
       /> */}
-      {/* <LazyDisqusComponent post={post}/> */}
+      <LazyDisqusComponent post={post}/>
         </div>
       </div>
      
