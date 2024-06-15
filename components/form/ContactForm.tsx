@@ -9,20 +9,20 @@ export default function ContactForm() {
     message: "",
   });
 
-  const [form, setForm] = useState("");
+  const [form, setForm] = useState({state:"", message:""});
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     setInputs((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
     }));
   };
 
-  const onSubmitForm = async (e) => {
+  const onSubmitForm = async (e:any) => {
     e.preventDefault();
 
     if (inputs.name && inputs.email && inputs.subject && inputs.message) {
-      setForm({ state: "loading" });
+      setForm({...form, state: "loading" });
       try {
         const res = await fetch(`/api/contact`, {
           method: "POST",
@@ -92,13 +92,12 @@ export default function ContactForm() {
         />
         <textarea
           id="message"
-          type="text"
           value={inputs.message}
           onChange={handleChange}
           className={styles.inputField}
           placeholder="Message"
-          rows="5"
           required
+          rows={5}
         />
         <input type="submit" className="ctaBtn primaryBtn" />
         {form.state === "loading" ? (
