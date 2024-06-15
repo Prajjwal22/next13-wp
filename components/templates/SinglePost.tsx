@@ -57,6 +57,7 @@ export default function SinglePost({ post }:props) {
   return (
     // <></>
     <article className={styles.single}>
+      
       <div id="progressBarContainer">
         <div
           id="progressBar"

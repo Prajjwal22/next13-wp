@@ -9,8 +9,3 @@ type HomeProps ={
 export default function Home() {
   return <Homepage/>;
 }
-
-export const metadata: Metadata = {
-  title: "omePage",
-  description: '...',
-}

@@ -1,12 +1,15 @@
 import PostPage from "@/components/templates/PostPage";
-import { getAllParams } from "@/lib/wordpress";
+import { getAllParams, getPostBySlug } from "@/lib/wordpress";
 import React from "react";
-import type { Metadata } from 'next'
+import type { Metadata, ResolvingMetadata } from "next";
 
-export default function SinglePostPage({ params }: { params: { slug: string } }) {
+type Props = {
+  params: { slug: string };
+};
+export default function SinglePostPage({ params }: Props) {
   const { slug } = params;
 
-  return <PostPage slug={slug}/>
+  return <PostPage slug={slug} />;
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
@@ -18,8 +21,30 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+  const post = await getPostBySlug(slug);
+  // fetch data
 
-export const metadata: Metadata = {
-  title: "PostPage",
-  description: '...',
+  // optionally access and extend (rather than replace) parent metadata
+
+  return {
+    title: post.title,
+    description: post?.seo.metaDesc,
+   
+    openGraph: {
+      images: post.featuredImage.node.sourceUrl,
+    },
+    alternates: {
+      canonical: `https://howtoshout.com/${post?.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }

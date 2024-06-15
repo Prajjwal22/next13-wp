@@ -1,17 +1,20 @@
-import LoadMore from '@/components/sections/threecolgrid/LoadMore'
-import { getAllCategories } from '@/lib/wordpress';
-import type { Metadata } from 'next'
-import React from 'react'
+import LoadMore from "@/components/sections/threecolgrid/LoadMore";
+import { getAllCategories, getPostBySlug } from "@/lib/wordpress";
+import type { Metadata, ResolvingMetadata } from "next";
+import React from "react";
+
+type Props = {
+  params: { slug: string };
+};
 
 export default function CategoryPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   return (
     <div>
-      <LoadMore/>
+      <LoadMore />
     </div>
-  )
+  );
 }
-
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
@@ -22,8 +25,26 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+  const post = await getPostBySlug(slug);
+  // fetch data
 
-export const metadata: Metadata = {
-  title: "PostPage",
-  description: '...',
+  // optionally access and extend (rather than replace) parent metadata
+
+  return {
+    title: `Articles from ${slug}`,
+    description: `Read all the Articles from ${slug} archive...`,
+    alternates: {
+      canonical: `https://howtoshout.com/category/${slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }

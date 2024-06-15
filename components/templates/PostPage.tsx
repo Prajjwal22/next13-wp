@@ -18,6 +18,7 @@ export default async function PostPage({
   );
   return (
     <>
+      
       <SinglePost post={post}/>
       <RelatedPosts relatedPosts={relatedPosts} />
     </>

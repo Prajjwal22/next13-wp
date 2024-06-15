@@ -26,6 +26,7 @@ export async function getMenu(id: string) {
     next: { revalidate: 10 },
   });
   const data = await res.json();
+  console.log(data);
   return data.data.menu.menuItems.nodes;
 }
 
@@ -211,7 +212,13 @@ export async function getPostBySlug(postSlug: string) {
           title
           content
           seo {
+            metaDesc
             fullHead
+            title
+            schema {
+              articleType
+              pageType
+            }
           }
         }
       }
@@ -358,9 +365,31 @@ export async function getAllAuthors(authorSlug: string) {
           username
           posts {
             nodes {
-              title
-              slug
+            title
+            slug
+            modified
+            featuredImage {
+              node {
+                sourceUrl(size: LARGE)
+              }
             }
+            excerpt
+            categories {
+              nodes {
+                name
+                slug
+              }
+            }
+            author {
+              node {
+                avatar {
+                  url
+                }
+                name
+                slug
+              }
+            }
+          }
           }
           description
           avatar {
@@ -369,7 +398,8 @@ export async function getAllAuthors(authorSlug: string) {
           slug
         }
       }
-      `, variables: {
+      `,
+      variables: {
         slug: authorSlug,
       },
     }),
@@ -377,4 +407,53 @@ export async function getAllAuthors(authorSlug: string) {
   });
   const data = await res.json();
   return data.data.user;
+}
+
+export async function getHomePageData() {
+  try {
+    const res = await fetch(`https://api.howtoshout.com/graphql`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+        query HomePage {
+  seo {
+    meta {
+      homepage {
+        description
+        title
+      }
+    }
+   openGraph {
+      defaultImage {
+        id
+      }
+      frontPage {
+        image {
+          sourceUrl(size: MEDIUM)
+        }
+      }
+    }
+    social {
+      facebook {
+        url
+      }
+      instagram {
+        url
+      }
+      twitter {
+        username
+      }
+    }
+  }
+}
+        `,
+      }),
+      next: { revalidate: 3600 },
+    });
+    const data = await res.json();
+    return data.data;
+  } catch (err) {}
 }
