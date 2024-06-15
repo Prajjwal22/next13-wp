@@ -48,6 +48,7 @@ export default function Search({ setIsSearch }: Props) {
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true)
     const newQuery = e.target.value;
     setQuery(newQuery);
     debouncedGetResults(newQuery);
