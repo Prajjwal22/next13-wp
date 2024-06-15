@@ -1,43 +1,54 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import styles from "./Search.module.scss";
+import { getSearchResults } from "@/lib/wordpress";
 
-type searchProps = {
-  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>
-}
+type Props = {
+  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export default function Search({ setIsSearch }:searchProps) {
+export default function Search({ setIsSearch }: Props) {
   const [query, setQuery] = useState("");
-
-  // const SEARCH_RESULTS = gql`
-  //   query GetPostsBySearch($query: String!, $after: String) {
-  //     searchPosts: posts(first: 10, after: $after, where: { search: $query }) {
-  //       nodes {
-  //         title
-  //         excerpt
-  //         slug
-  //       }
-  //       pageInfo {
-  //         endCursor
-  //         hasNextPage
-  //       }
-  //     }
-  //   }
-  // `;
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
 
-  // const [executeSearch, { data, loading }] = useLazyQuery(SEARCH_RESULTS);
+  useEffect(() => {
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [timer]);
 
-  // const handleChange = (e) => {
-  //   const newQuery = e.target.value;
-  //   setQuery(newQuery);
-  //   if (newQuery !== query) {
-  //     executeSearch({
-  //       variables: { query: newQuery },
-  //     });
-  //   }
-  // };
+
+
+  const getResults = async (query: string) => {
+    let results = await getSearchResults(query);
+    setData(results);
+    setLoading(false);
+  };
+
+  const debouncedGetResults = useCallback(
+    (query: string) => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      const newTimer = setTimeout(() => {
+        getResults(query);
+      }, 1000);
+      setTimer(newTimer);
+    },
+    [timer]
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    debouncedGetResults(newQuery);
+  };
 
   return (
     <div
@@ -46,10 +57,10 @@ export default function Search({ setIsSearch }:searchProps) {
       }}
       className={styles.search}
     >
-      {/* <div className={styles.searchModal}>
+      <div className={styles.searchModal}>
         <div className={styles.searchWrapper}>
           <div className={styles.searchControls}>
-            <label for="docsearch-input">
+            <label htmlFor="docsearch-input">
               <FaSearch />
             </label>
             <input
@@ -75,7 +86,7 @@ export default function Search({ setIsSearch }:searchProps) {
             ) : data?.searchPosts?.nodes.length === 0 ? (
               <span>No results found</span>
             ) : (
-              data?.searchPosts?.nodes?.map((results, i) => {
+              data?.searchPosts?.nodes?.map((results: Posts, i: number) => {
                 return (
                   <div key={i} className={styles.result}>
                     <span className={styles.resultText}>
@@ -92,7 +103,7 @@ export default function Search({ setIsSearch }:searchProps) {
             )}
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

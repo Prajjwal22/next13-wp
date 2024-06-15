@@ -457,3 +457,38 @@ export async function getHomePageData() {
     return data.data;
   } catch (err) {}
 }
+
+export async function getSearchResults(searchQuery: string) {
+  try {
+    const res = await fetch(`https://api.howtoshout.com/graphql`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+         query GetPostsBySearch($query: String!, $after: String) {
+      searchPosts: posts(first: 10, after: $after, where: { search: $query }) {
+        nodes {
+          title
+          excerpt
+          slug
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+      `,
+        variables: {
+          query: searchQuery,
+        },
+      }),
+    });
+    const data = await res.json();
+    return data.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
