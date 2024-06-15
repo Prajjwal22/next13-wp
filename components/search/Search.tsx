@@ -8,12 +8,17 @@ type Props = {
   setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type searchResults = {
+  searchPosts: {
+    nodes: Posts[];
+  };
+};
+
 export default function Search({ setIsSearch }: Props) {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Posts[]>([]);
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
-
 
   useEffect(() => {
     return () => {
@@ -23,11 +28,9 @@ export default function Search({ setIsSearch }: Props) {
     };
   }, [timer]);
 
-
-
   const getResults = async (query: string) => {
     let results = await getSearchResults(query);
-    setData(results);
+    setData(results.searchPosts.nodes);
     setLoading(false);
   };
 
@@ -83,10 +86,10 @@ export default function Search({ setIsSearch }: Props) {
               <span>Loading...</span>
             ) : !data ? (
               <span>No recent searches</span>
-            ) : data?.searchPosts?.nodes.length === 0 ? (
+            ) : data.length === 0 ? (
               <span>No results found</span>
             ) : (
-              data?.searchPosts?.nodes?.map((results: Posts, i: number) => {
+              data.map((results: Posts, i: number) => {
                 return (
                   <div key={i} className={styles.result}>
                     <span className={styles.resultText}>
