@@ -31,10 +31,16 @@ export default function LoadMore({ authorData }: Props) {
     endCursor: "",
   });
 
-  const pathName = usePathname();
 
-  const catSlug = pathName.split("/");
-  const postCategory = catSlug[catSlug.length - 1];
+  const pathName: string | null = usePathname();
+
+
+
+let postCategory = "";
+  if (pathName) {
+    const catSlug = pathName.split("/");
+    postCategory = catSlug[catSlug.length - 1];
+  }
 
   let author = "lucid-dijkstra";
 
@@ -76,7 +82,7 @@ export default function LoadMore({ authorData }: Props) {
             : "Latest Posts From " + postCategory}
         </h3>
       </div>
-      {pathName === "/" || pathName.includes("category") ? (
+      {pathName && (pathName === "/" || pathName.includes("category") ? (
         ""
       ) : authorData ? (
         <div className={styles.authorBox}>
@@ -105,9 +111,9 @@ export default function LoadMore({ authorData }: Props) {
         </div>
       ) : (
         ""
-      )}
+      ))}
       <div className={styles.gridWrapper}>
-        {pathName === "/" || pathName.includes("/category")
+        {pathName && (pathName === "/" || pathName.includes("/category")
           ? posts.map((post, i) => {
               return <VerticalCard key={i} post={post} />;
             })
@@ -119,7 +125,7 @@ export default function LoadMore({ authorData }: Props) {
                 </>
               );
             })
-          : ""}
+          : "")}
       </div>
 
       {batchInfo.hasNextPage ? (

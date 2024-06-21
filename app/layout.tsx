@@ -47,7 +47,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const menu = await getMenu("dGVybToxMw==");
+  const menu = await getMenu("dGVybTo0NDU=");
 
   return (
     <html lang="en">
