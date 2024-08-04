@@ -27,7 +27,7 @@ export const formatDate = (date: Date) => {
 
 export const getBlurImage = async (image: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/blur`, {
+    const response = await fetch(`https://howtoshout.com/api/blur`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
