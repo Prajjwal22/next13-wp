@@ -16,10 +16,9 @@ export default function SinglePostPage({ params }: Props) {
 export async function generateStaticParams() {
   const posts = await getAllParams();
 
-  const paths = posts.map((post: Posts) => ({
+  return posts.map((post: Posts) => ({
     slug: post.slug,
   }));
-  return { paths, fallback: false };
 }
 
 export async function generateMetadata(
