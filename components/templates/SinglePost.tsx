@@ -11,9 +11,10 @@ import { formatDate } from "@/lib/utils";
 
 type props = {
   post: Posts;
+  placeholder: string;
 };
 
-export default function SinglePost({ post }: props) {
+export default function SinglePost({ post, placeholder }: props) {
   const featuredImage = post.featuredImage?.node?.sourceUrl || "/featured.png";
   const postTitle = post.title;
   const authorName = post.author?.node?.name || "Editorial Staff";
@@ -51,7 +52,6 @@ export default function SinglePost({ post }: props) {
 
     return () => window.removeEventListener("scroll", progressBarHandler);
   }, []);
-
 
   return (
     // <></>
@@ -134,6 +134,8 @@ export default function SinglePost({ post }: props) {
               width={600}
               height={450}
               priority
+              placeholder="blur"
+              blurDataURL={placeholder}
             />
           </div>
           <div

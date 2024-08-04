@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+import withPlaiceholder from "@plaiceholder/next";
+
+
 const nextConfig = {
     env:{
         WP_GRAPHQL_ENDPOINT: "https://api.howtoshout.com/graphql"
@@ -19,4 +22,6 @@ const nextConfig = {
     }
 };
 
-export default nextConfig;
+export default withPlaiceholder(nextConfig);
+
+

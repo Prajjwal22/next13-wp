@@ -3,20 +3,23 @@ import Link from "next/link";
 
 import { FaClock, FaUser } from "react-icons/fa";
 import styles from "./OverlayCard.module.scss";
-import { formatDate } from "@/lib/utils";
+import { formatDate, getBlurImage } from "@/lib/utils";
 
 type postProps = {
-  post:Posts
-}
+  post: Posts;
+};
 
-export default function OverlayCard({ post }:postProps) {
+export default async function OverlayCard({ post }: postProps) {
   const featuredImage = post.featuredImage.node.sourceUrl;
   const postTitle = post.title;
   const authorName = post?.author?.node?.name || "Sophia James";
   const authorSlug = "/author/" + post?.author?.node?.slug;
   const pubDate = post.modified;
   const slug = post.slug;
-  
+
+  const placeholder = await getBlurImage(featuredImage);
+
+  console.log(placeholder.base64);
 
   return (
     <div className={styles.overlayCard}>
@@ -28,15 +31,22 @@ export default function OverlayCard({ post }:postProps) {
             height="500"
             priority
             alt="featured image"
+            placeholder="blur"
+            blurDataURL={placeholder.base64}
           />
 
-          <div className={styles.overlayGradient}></div>
+          <div className={styles.overlayGradient}></div>  
           <div className={styles.cardContent}>
-          <Link href={"/" + slug}><h3 className={styles.cardTitle}>{postTitle}</h3></Link>
+            <Link href={"/" + slug}>
+              <h3 className={styles.cardTitle}>{postTitle}</h3>
+            </Link>
             <div className={styles.cardMeta}>
-             <Link href={authorSlug}> <span className={styles.cardAuthor}>
-                <FaUser /> {authorName}
-              </span></Link>
+              <Link href={authorSlug}>
+                {" "}
+                <span className={styles.cardAuthor}>
+                  <FaUser /> {authorName}
+                </span>
+              </Link>
               <span className={styles.cardDate}>
                 <FaClock />
                 {formatDate(new Date(pubDate))}
