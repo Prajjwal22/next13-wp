@@ -25,15 +25,14 @@ export const formatDate = (date: Date) => {
   return long.format(date);
 };
 
-export const getBlurImage = async (image: string) => {
+export const getBlurImage = async (image = false) => {
   const defbase64 =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALKlos3U3fz8/ODDrwA3PkIQHiUTIigAFBoA8enfgIB8o5+c2NTOk8wT4KC5u6gAAAAASUVORK5CYII=";
   try {
-
-    if(!image){
+    if (!image) {
       return {
         base64: defbase64,
-      }
+      };
     }
     const response = await fetch(`https://howtoshout.com/api/blur`, {
       method: "POST",
@@ -43,8 +42,9 @@ export const getBlurImage = async (image: string) => {
       body: JSON.stringify({ src: image }),
     });
 
-
-    const data = await response.json();
+    const data = {
+      base64: defbase64,
+    };
     return data;
   } catch (error) {
     console.error("Error fetching blur image:", error);
