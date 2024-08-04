@@ -1,9 +1,8 @@
+import { NextRequest, NextResponse } from "next/server";
 import { getPlaiceholder } from "plaiceholder";
 
-export async function POST(request: Request) {
-  const body = await request.json();
-
-  const { src } = body;
+export const POST = async (request: NextRequest) => {
+  const { src } = await request.json();
 
   try {
     const buffer = await fetch(src).then(async (res) =>
@@ -12,10 +11,8 @@ export async function POST(request: Request) {
 
     const { base64 } = await getPlaiceholder(buffer);
 
-    // console.log(base64);
-
-    return Response.json({ base64, message: "done" });
+    return new NextResponse(JSON.stringify({ base64 }), { status: 200 });
   } catch (err) {
-    return Response.json({ message: "something went wrong", err });
+    return new NextResponse("Failed to create a new prompt", { status: 500 });
   }
-}
+};

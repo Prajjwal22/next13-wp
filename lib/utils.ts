@@ -26,33 +26,35 @@ export const formatDate = (date: Date) => {
 };
 
 export const getBlurImage = async (image: string) => {
-  // try {
-  //   const response = await fetch(`https://howtoshout.com/api/blur`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ src: image }),
-  //   });
+  const defbase64 =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALKlos3U3fz8/ODDrwA3PkIQHiUTIigAFBoA8enfgIB8o5+c2NTOk8wT4KC5u6gAAAAASUVORK5CYII=";
+  try {
 
-  //   console.log(response)
+    if(!image){
+      return {
+        base64: defbase64,
+      }
+    }
+    const response = await fetch(`https://howtoshout.com/api/blur`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ src: image }),
+    });
 
-  //   if (!response.ok) {
-  //     throw new Error("Failed to fetch blur image");
-  //   }
 
-  //   const data = await response.json();
-  //   console.log(data,"uttar")
-  //   return data;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching blur image:", error);
+    throw error;
+  }
 
-  // } catch (error) {
-  //   console.error("Error fetching blur image:", error);
-  //   throw error;
-  // }
+  // const placeholder = {
+  //   base64:
+  //     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALKlos3U3fz8/ODDrwA3PkIQHiUTIigAFBoA8enfgIB8o5+c2NTOk8wT4KC5u6gAAAAASUVORK5CYII=",
+  // };
 
-  const placeholder = {
-    base64: "ABCDEFGHIJKLMNOPQRSTUVWXY",
-  };
-
-  return placeholder;
+  // return placeholder;
 };
