@@ -26,23 +26,33 @@ export const formatDate = (date: Date) => {
 };
 
 export const getBlurImage = async (image: string) => {
-  try {
-    const response = await fetch(`https://howtoshout.com/api/blur`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ src: image }),
-    });
+  // try {
+  //   const response = await fetch(`https://howtoshout.com/api/blur`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ src: image }),
+  //   });
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch blur image");
-    }
+  //   console.log(response)
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching blur image:", error);
-    throw error;
-  }
+  //   if (!response.ok) {
+  //     throw new Error("Failed to fetch blur image");
+  //   }
+
+  //   const data = await response.json();
+  //   console.log(data,"uttar")
+  //   return data;
+
+  // } catch (error) {
+  //   console.error("Error fetching blur image:", error);
+  //   throw error;
+  // }
+
+  const placeholder = {
+    base64: "ABCDEFGHIJKLMNOPQRSTUVWXY",
+  };
+
+  return placeholder;
 };
