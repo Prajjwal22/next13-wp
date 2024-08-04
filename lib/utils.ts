@@ -48,7 +48,7 @@ export const getBlurImage = async (image: string) => {
     return data;
   } catch (error) {
     console.error("Error fetching blur image:", error);
-    throw error;
+    // throw error;
   }
 
   // const placeholder = {
