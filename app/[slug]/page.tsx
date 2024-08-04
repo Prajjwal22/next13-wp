@@ -16,9 +16,10 @@ export default function SinglePostPage({ params }: Props) {
 export async function generateStaticParams() {
   const posts = await getAllParams();
 
-  return posts.map((post: Posts) => ({
+  const paths = posts.map((post: Posts) => ({
     slug: post.slug,
   }));
+  return { paths, fallback: false };
 }
 
 export async function generateMetadata(
@@ -35,7 +36,7 @@ export async function generateMetadata(
   return {
     title: post.title,
     description: post?.seo.metaDesc,
-   
+
     openGraph: {
       images: post.featuredImage.node.sourceUrl,
     },
