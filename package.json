@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.5",
     "disqus-react": "^1.1.5",
     "next": "14.1.0",
     "react": "^18",

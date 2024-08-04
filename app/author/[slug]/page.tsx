@@ -6,7 +6,6 @@ import React from 'react'
 export default async function AuthorPage({ params:{slug} }: { params: { slug: string } }) {
 
   const authorData = await getAllAuthors(slug)
-  console.log(authorData)
     return (
       <div>
         <LoadMore authorData={authorData}/>

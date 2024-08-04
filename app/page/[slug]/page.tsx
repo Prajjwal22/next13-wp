@@ -28,7 +28,4 @@ export async function generateStaticParams() {
   }));
 }
 
-export const metadata: Metadata = {
-  title: "PostPage",
-  description: "...",
-};
+

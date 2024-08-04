@@ -1,7 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import localFont from "next/font/local";
 import "./globals.scss";
-import Homepage from "@/components/templates/Homepage";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { getHomePageData, getMenu } from "@/lib/wordpress";
@@ -47,7 +47,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const menu = await getMenu("dGVybTo0NDU=");
+  const menu = await getMenu("dGVybToyNzA=");
 
   return (
     <html lang="en">
@@ -55,6 +55,8 @@ export default async function RootLayout({
         <Header menu={menu} />
         {children}
         <Footer />
+        <GoogleAnalytics gaId="G-LFFTL0Y202" />
+
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import styles from "./Footer.module.scss";
 import { getMenu } from "@/lib/wordpress";
 
 export default async function Footer() {
-  const footerMenu = await getMenu("dGVybTo0NDQ=");
+  const footerMenu = await getMenu("dGVybToz");
   return (
     <div className={styles.footer}>
       <div className={styles.footerWrapper}>
