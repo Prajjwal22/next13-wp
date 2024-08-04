@@ -26,7 +26,7 @@ export default async function OverlayCard({ post }: postProps) {
       <div className={styles.cardWrapper}>
         <div className={styles.cardImage}>
           <Image
-            src={featuredImage}
+            src={`${featuredImage}.webp`}
             width="800"
             height="500"
             priority
@@ -35,7 +35,7 @@ export default async function OverlayCard({ post }: postProps) {
             blurDataURL={placeholder.base64}
           />
 
-          <div className={styles.overlayGradient}></div>  
+          <div className={styles.overlayGradient}></div>
           <div className={styles.cardContent}>
             <Link href={"/" + slug}>
               <h3 className={styles.cardTitle}>{postTitle}</h3>

@@ -26,7 +26,7 @@ export default async function HorizontalCard({ post }: postProps) {
         <div className={styles.cardImage}>
           <Link href={slug}>
             <Image
-              src={featuredImage}
+              src={`${featuredImage}.webp`}
               width={400}
               height={300}
               alt={postTitle}

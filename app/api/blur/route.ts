@@ -1,7 +1,6 @@
 import { getPlaiceholder } from "plaiceholder";
 
 export async function POST(request: Request) {
-  console.log("API GoT HOT");
 
   const body = await request.json();
 
