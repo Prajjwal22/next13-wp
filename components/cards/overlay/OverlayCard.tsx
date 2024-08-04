@@ -19,7 +19,6 @@ export default async function OverlayCard({ post }: postProps) {
 
   const placeholder = await getBlurImage(featuredImage);
 
-  console.log(placeholder.base64);
 
   return (
     <div className={styles.overlayCard}>

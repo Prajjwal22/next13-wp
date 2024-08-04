@@ -16,6 +16,6 @@ export async function POST(request: Request) {
 
     return Response.json({ base64, message: "done" });
   } catch (err) {
-    err;
+    return Response.json({ message: "something went wrong", err });
   }
 }
