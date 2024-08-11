@@ -241,13 +241,13 @@ export async function getAllParams() {
     },
     body: JSON.stringify({
       query: `
-      query GetAllSlugs {
-        posts(first: 100) {
-          nodes {
-            slug
-          }
-        }
-      }
+    query GetAllSlugs {
+  posts(first: 100, where: {status: PUBLISH}) {
+    nodes {
+      slug
+    }
+  } 
+}
       `,
     }),
     next: { revalidate: 3600 },
